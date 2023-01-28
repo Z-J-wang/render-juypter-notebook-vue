@@ -1,18 +1,28 @@
 <template>
   <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
+    <RenderJupyterNotebook :notebook="notebook" />
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from "@/components/HelloWorld.vue";
+import RenderJupyterNotebook from "@/components/RenderJupyterNotebook";
+import example from "@/assets/OutputExamples";
 
 export default {
   name: "HomeView",
-  components: {
-    HelloWorld,
+  data() {
+    return {
+      notebook: example,
+    };
   },
+  components: { RenderJupyterNotebook },
 };
 </script>
+
+<style lang="less" scoped>
+.home {
+  width: 1200px;
+  margin: 0 auto;
+  background-color: white;
+}
+</style>
