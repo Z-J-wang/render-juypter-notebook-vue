@@ -1,5 +1,5 @@
 name: Lint
-run-name: ${{ github.actor }} trigger Lint of ${{ github.event_name }}
+run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
 on:
   push:
     branches: ['devel']
