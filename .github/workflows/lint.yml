@@ -1,5 +1,5 @@
-name: lint
-
+name: Lint
+run-name: ${{ github.actor }} Lint
 on:
   push:
     branches: ['devel']
@@ -15,7 +15,7 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - name: install
+      - name: Install
         run: yarn
-      - name: lint
+      - name: Lint
         run: yarn lint
