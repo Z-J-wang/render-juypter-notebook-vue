@@ -1,5 +1,5 @@
 name: Lint
-run-name: ${{ github.actor }} Lint
+run-name: ${{ github.actor }} trigger Lint of ${{ github.event_name }}
 on:
   push:
     branches: ['devel']
@@ -8,7 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  build:
+  lint:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
