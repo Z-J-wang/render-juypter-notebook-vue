@@ -21,6 +21,7 @@ jobs:
           node-version: 16
       - run: npm install
       - run: npm run lint
+      - run: npm run build:lib
 
   publish-npm:
     needs: build
