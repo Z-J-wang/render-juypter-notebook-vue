@@ -1,6 +1,6 @@
 {
-  "name": "render_jupyter_notebook",
-  "version": "0.1.2",
+  "name": "render-jupyter-notebook",
+  "version": "0.1.3",
   "private": false,
   "main": "./lib/RenderJupyterNotebook/index.common.js",
   "scripts": {
