@@ -1,11 +1,13 @@
 {
   "name": "render_jupyter_notebook",
   "version": "0.1.0",
-  "private": true,
+  "private": false,
+  "main": "./lib/RenderJupyterNotebook/index.common.js",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "package": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name RenderJupyterNotebook/index --dest lib"
   },
   "dependencies": {
     "@codemirror/lang-python": "^6.1.0",
