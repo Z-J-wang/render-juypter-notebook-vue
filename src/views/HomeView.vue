@@ -10,12 +10,12 @@ import example from "@/assets/OutputExamples";
 
 export default {
   name: "HomeView",
+  components: { RenderJupyterNotebook },
   data() {
     return {
       notebook: example,
     };
   },
-  components: { RenderJupyterNotebook },
 };
 </script>
 
