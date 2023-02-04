@@ -69,22 +69,26 @@ export class Notebook {
    * @returns {DocumentFragment} 返回一个 DocumentFragment 对象
    */
   async render() {
-    for (let cell of this.#cells) {
-      let node = null;
-      let { cell_type, source } = cell;
-      cell.source = typeof source === "string" ? source : source.join("");
-      switch (cell_type) {
-        case "markdown":
-          node = await this.#renderMarkdownCell(cell);
-          break;
-        case "code":
-          node = await this.#renderCodeCell(cell);
-          break;
-        case "raw":
-          node = await this.#renderRawCell(cell);
-          break;
+    try {
+      for (let cell of this.#cells) {
+        let node = null;
+        let { cell_type, source } = cell;
+        cell.source = typeof source === "string" ? source : source.join("");
+        switch (cell_type) {
+          case "markdown":
+            node = await this.#renderMarkdownCell(cell);
+            break;
+          case "code":
+            node = await this.#renderCodeCell(cell);
+            break;
+          case "raw":
+            node = await this.#renderRawCell(cell);
+            break;
+        }
+        this.#fragment.appendChild(node);
       }
-      this.#fragment.appendChild(node);
+    } catch (error) {
+      console.error(error);
     }
     return this.#fragment;
   }
@@ -166,13 +170,8 @@ export class Notebook {
     let node = null;
     let { source, outputs, execution_count: executionCount } = cell;
     let contentNode = document.createElement("div");
-    contentNode.classList = [
-      "lm-Widget",
-      "p-Widget",
-      "jp-Cell",
-      "jp-CodeCell",
-      "jp-Notebook-cell",
-    ];
+    contentNode.className =
+      "lm-Widget p-Widget jp-Cell jp-CodeCell jp-Notebook-cell ";
     createCodemirror(source, contentNode); // input代码块渲染
     node = this.#createContainerNode("inputCode", contentNode, executionCount);
     await this.#renderOutputCell(outputs, contentNode.parentNode.parentNode);
