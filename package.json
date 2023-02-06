@@ -1,8 +1,10 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "0.0.1-beta.1",
+  "version": "0.0.1-beta.2",
   "private": false,
   "main": "./lib/RenderJupyterNotebook/index.umd.min.js",
+  "license": "MIT",
+  "author": "wangzhijie <1356573671@qq.com>".
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
