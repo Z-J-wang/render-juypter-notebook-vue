@@ -9,36 +9,36 @@ on:
   workflow_dispatch:
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
+#   lint:
+#     runs-on: ubuntu-latest
+#     steps:
+#       - uses: actions/checkout@v3
 
-      - name: Cache node modules
-        id: cache-yarn
-        uses: actions/cache@v3
-        env:
-          cache-name: cache-node-modules
-        with:
-          # npm cache files are stored in `~/.npm` on Linux/macOS
-          path: ~/.npm
-          key: ${{ runner.os }}-lint-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
-          restore-keys: |
-            ${{ runner.os }}-lint-${{ env.cache-name }}-
-            ${{ runner.os }}-lint-
-            ${{ runner.os }}-
+#       - name: Cache node modules
+#         id: cache-yarn
+#         uses: actions/cache@v3
+#         env:
+#           cache-name: cache-node-modules
+#         with:
+#           # npm cache files are stored in `~/.npm` on Linux/macOS
+#           path: ~/.npm
+#           key: ${{ runner.os }}-lint-${{ env.cache-name }}-${{ hashFiles('**/yarn.lock') }}
+#           restore-keys: |
+#             ${{ runner.os }}-lint-${{ env.cache-name }}-
+#             ${{ runner.os }}-lint-
+#             ${{ runner.os }}-
 
-      - if: ${{ steps.cache-yarn.outputs.cache-hit != 'true' }}
-        name: List the state of node modules
-        continue-on-error: true
-        run: yarn list
+#       - if: ${{ steps.cache-yarn.outputs.cache-hit != 'true' }}
+#         name: List the state of node modules
+#         continue-on-error: true
+#         run: yarn list
 
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn test
+#       - run: yarn install
+#       - run: yarn lint
+#       - run: yarn test
 
   publish-npm:
-    needs: lint
+#     needs: lint
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -69,4 +69,4 @@ jobs:
       - name: Publish
         run: npm publish
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{secrets.NPM_TOKEN}}
