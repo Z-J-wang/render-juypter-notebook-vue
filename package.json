@@ -1,6 +1,6 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "0.0.1-beta.2",
+  "version": "0.0.1-beta.3",
   "private": false,
   "main": "./lib/RenderJupyterNotebook/index.umd.min.js",
   "license": "MIT",
