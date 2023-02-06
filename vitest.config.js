@@ -7,6 +7,6 @@ export default defineConfig({
     alias: {
       "@": "src/",
     },
-    environment: "happy-dom", // 全局引入DOM环境
+    environment: "jsdom", // 全局引入DOM环境
   },
 });
