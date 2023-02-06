@@ -38,10 +38,10 @@ export class Notebook {
     this.#source = JSON.parse(JSON.stringify(source));
     const { cells } = this.#source;
     this.#cells = cells;
-    this.#fragment = document.createElement("div"); // 创建一个新的空白的div，notebook 渲染的结果都暂时存储在其中
+    this.#fragment = document.createElement("div"); // 创建一个新的空白的div片段，notebook渲染的结果都暂时存储在其中
 
     /*---------- 默认配置项 START ----------*/
-    this.#trusted = trusted || false; // 当前渲染字符是安全或者但求运行环境是否可信，涉及Script,SVG渲染
+    this.#trusted = trusted || false; // 当前运行环境是否安全可信，涉及Script,SVG渲染
     this.#sanitizer = defaultSanitizer; // 字符串无害化处理
     this.#shouldTypeset = shouldTypeset || true; // 是否对数学公式字符进行latex排版,这里默认为true
     this.#latexTypesetter = new MathJaxTypesetter({
