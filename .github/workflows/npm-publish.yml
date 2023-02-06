@@ -4,9 +4,8 @@
 name: Publish Package to npmjs
 
 on:
-  pull_request:
-    branches:
-      - master
+  release:
+    types: [created]
   workflow_dispatch:
 
 jobs:
