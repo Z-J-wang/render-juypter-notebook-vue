@@ -4,7 +4,7 @@ RenderJupyterNotebook是一个 vue 组件，实现了：**通过JavaScript还原
 
 # 使用
 
-> RenderJupyterNotebook组件已经发布到npm。链接：
+> RenderJupyterNotebook组件已经发布到npm。链接：[render-jupyter-notebook-vue - npm (npmjs.com)](https://www.npmjs.com/package/render-jupyter-notebook-vue)
 
 ## 安装render-jupyter-notebook-vue插件
 
