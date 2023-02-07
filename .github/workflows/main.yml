@@ -1,0 +1,23 @@
+name: Lint and test
+run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
+on:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - name: Setup node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.13.x
+      - name: 读取当前版本号
+        id: version
+        uses: ashley-taylor/read-json-property-action@v1.0
+        with:
+        	# 读取dist/package.json的，而不是根路径下的package.json
+          path: ./dist/package.json
+          property: version
+      - run: ${{ github }}
+
