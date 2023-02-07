@@ -16,7 +16,6 @@ jobs:
         id: version
         uses: ashley-taylor/read-json-property-action@v1.0
         with:
-        	# 读取dist/package.json的，而不是根路径下的package.json
           path: ./dist/package.json
           property: version
       - run: ${{ github }}
