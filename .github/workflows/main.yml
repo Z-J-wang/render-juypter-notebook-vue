@@ -20,5 +20,5 @@ jobs:
         with:
           path: package.json
           property: version
-      - run: ${{ github.event_name }}
+      - run: echo $GITHUB
 
