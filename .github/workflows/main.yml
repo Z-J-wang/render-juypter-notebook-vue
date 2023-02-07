@@ -18,5 +18,5 @@ jobs:
         with:
           path: package.json
           property: version
-      - run: ${{ github }}
+      - run: ${{ github.event_name }}
 
