@@ -20,5 +20,5 @@ jobs:
         with:
           path: package.json
           property: version
-      - run: echo 'asdadad $GITHUB'
+      - run: echo steps.version.outputs.value
 
