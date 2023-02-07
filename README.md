@@ -104,6 +104,10 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 只有调用该方法，`Class Notebook`才会进行HTML渲染。
 
+## 使用说明
+
+`Class Notebook`并不依赖于vue。可单独引入其他架构项目。
+
 # Author
 
 + Z-J-wang <https://github.com/Z-J-wang>
