@@ -20,5 +20,5 @@ jobs:
         with:
           path: package.json
           property: version
-      - run: echo ${{github}}
+      - run: echo ${{github.run_id}}
 
