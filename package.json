@@ -1,14 +1,26 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "0.0.1-beta.5",
-  "private": false,
-  "main": "./lib/RenderJupyterNotebook/index.umd.min.js",
+  "version": "0.0.1-beta.3",
   "license": "MIT",
+  "homepage": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
+  "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
+  "main": "./lib/RenderJupyterNotebook/index.umd.min.js",
   "author": "wangzhijie <1356573671@qq.com>",
+  "description": "render-jupyter-notebook-vue is a vue component that implements rendering of notebook files in vue. render-jupyter-notebook-vue是一个vue组件，实现了notebook文件的渲染在vue中的渲染。",
+  "keywords": [
+    "notebook",
+    ".ipynb",
+    "vue",
+    "jupyter",
+    "jupyterlab",
+    "html",
+    "JavaScript"
+  ],
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "build:lib": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name RenderJupyterNotebook/index --dest lib",
+    "build:lib": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name index --dest lib/RenderJupyterNotebook",
+    "build:lib-notebook": "vue-cli-service build --target lib ./src/utils/notebook/index.js --name index --dest lib/Notebook",
     "lint": "vue-cli-service lint",
     "test": "vitest run --config vitest.config.js",
     "test:watch": "vitest watch --config vitest.config.js"
