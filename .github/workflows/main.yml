@@ -20,5 +20,5 @@ jobs:
         with:
           path: package.json
           property: version
-      - run: echo $GITHUB
+      - run: echo 'asdadad $GITHUB'
 
