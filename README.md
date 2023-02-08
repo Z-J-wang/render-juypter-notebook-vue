@@ -108,7 +108,7 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 ## 使用说明
 
-`Class Notebook`并不依赖于vue。可单独引入其他架构项目中。具体用法请查看：[Z-J-wang/render-juypter-notebook-vue at v0.0.1-beta.13 (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/v0.0.1-beta.13#方法二调用class-notebook渲染notebook)
+`Class Notebook`并不依赖于vue。可单独引入其他架构项目中。具体用法请查看：[Z-J-wang/render-juypter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue#方法二调用class-notebook渲染notebook)
 
 # Author
 
