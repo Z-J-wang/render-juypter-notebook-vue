@@ -61,7 +61,9 @@ jobs:
       - name: Install
         run: yarn
       - name: Build lib
-        run: yarn run build:lib
+        run: |
+          yarn build:lib
+          yarn build:lib-notebook
       - name: Publish
         run: yarn publish
         env:
