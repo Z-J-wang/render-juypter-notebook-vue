@@ -31,7 +31,7 @@ jobs:
         name: List the state of node modules
         continue-on-error: true
         run: yarn list
-
+      - run: ls
       - name: Install
         run: yarn
       - name: Lint
