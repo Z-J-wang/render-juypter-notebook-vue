@@ -35,7 +35,7 @@ RenderJupyterNotebook组件仅接收一个参数：`notebook`。它是notebook�
 </template>
 
 <script>
-import RenderJupyterNotebook from "@/components/RenderJupyterNotebook";
+import RenderJupyterNotebook from "render-jupyter-notebook-vue";
 import example from "@/assets/OutputExamples.json";
 
 export default {
@@ -59,6 +59,8 @@ export default {
 例如：
 
 ```js
+import { Notebook } from "render-jupyter-notebook-vue/lib/Notebook/index.umd";
+
 const notebook = new Notebook(this.notebook, false);
 const fragment = await notebook.render();
 this.$refs.NotebookFragment.appendChild(fragment);
@@ -106,7 +108,7 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 ## 使用说明
 
-`Class Notebook`并不依赖于vue。可单独引入其他架构项目。
+`Class Notebook`并不依赖于vue。可单独引入其他架构项目中。具体用法请查看：[Z-J-wang/render-juypter-notebook-vue at v0.0.1-beta.13 (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/v0.0.1-beta.13#方法二调用class-notebook渲染notebook)
 
 # Author
 
