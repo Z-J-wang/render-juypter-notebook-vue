@@ -1,6 +1,7 @@
 name: Workflow test
 run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
 on:
+  push:
   workflow_dispatch:
 
 jobs:
@@ -12,4 +13,4 @@ jobs:
         with: 
           node-version: 16
       - run: NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
-      - run: echo $NPM_PACKAGE_NAME
+      - run: echo ${NPM_PACKAGE_NAME}
