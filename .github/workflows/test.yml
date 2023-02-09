@@ -14,6 +14,5 @@ jobs:
         with: 
           node-version: 16
       - run: echo "NPM_PACKAGE_VERSIONS=$('npm view ${{env.NPM_PACKAGE_NAME}} versions')" >> $GITHUB_ENV
-      - run: echo ${{env}}
-      - run: echo ${{env.CI}}
+      - run: echo ${{env.NPM_PACKAGE_VERSIONS}}
 
