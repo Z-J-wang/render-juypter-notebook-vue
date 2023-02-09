@@ -23,13 +23,13 @@ jobs:
         run: |
           echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
           echo "NPM_PACKAGE_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
-
+      
       - run: yarn install
       - run: yarn lint
       - run: yarn test
 
   publish-npm:
-    if: contains("$(npm view ${{env.NPM_PACKAGE_NAME}} versions)", ${{ env.NPM_PACKAGE_VERSION }})
+    if: contains("$(npm view ${{ env.NPM_PACKAGE_NAME }} versions)", ${{ env.NPM_PACKAGE_VERSION }})
     needs: lint
     runs-on: ubuntu-latest
     steps:
@@ -38,6 +38,8 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
+          
+      - run: echo ${{env.NPM_PACKAGE_NAME}}
       - name: Install
         run: yarn
       - name: Build lib
