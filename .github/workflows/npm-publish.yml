@@ -30,7 +30,7 @@ jobs:
       - run: yarn test
 
   publish-npm:
-    if: ${{ !contains(env.NPM_PACKAGE_VERSIONS, env.NPM_PACKAGE_VERSION) }}
+    # if: ${{ !contains(env.NPM_PACKAGE_VERSIONS, env.NPM_PACKAGE_VERSION) }}
     needs: lint
     runs-on: ubuntu-latest
     steps:
