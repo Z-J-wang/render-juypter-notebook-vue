@@ -40,14 +40,14 @@ jobs:
           node-version: 16
           registry-url: https://registry.npmjs.org/
           
-      - run: echo ${{env.NPM_PACKAGE_NAME}}
-      - name: Install
-        run: yarn
-      - name: Build lib
-        run: |
-          yarn build:lib
-          yarn build:lib-notebook
-      - name: Publish
-        run: npm publish
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: echo ${{env.NPM_PACKAGE_VERSIONS}}
+#       - name: Install
+#         run: yarn
+#       - name: Build lib
+#         run: |
+#           yarn build:lib
+#           yarn build:lib-notebook
+#       - name: Publish
+#         run: npm publish
+#         env:
+#           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
