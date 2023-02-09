@@ -11,8 +11,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - run: echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
-      - run: echo ${{env.NPM_PACKAGE_NAME}}
       
       - name: Cache node modules
         id: cache-yarn
@@ -31,9 +29,6 @@ jobs:
       - if: ${{ steps.cache-yarn.outputs.cache-hit != 'true' }}
         name: List the state of node modules
         continue-on-error: true
-        run: yarn list
-
-      - name: Install
         run: yarn
       - name: Lint
         run: yarn lint
