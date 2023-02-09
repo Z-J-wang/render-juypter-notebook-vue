@@ -2,7 +2,6 @@ name: Lint and test
 run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
 on:
   push:
-    branches: ['devel']
   pull_request:
     branches: ['master']
   workflow_dispatch:
@@ -12,7 +11,9 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
+      - run: echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
+      - run: echo ${{env.NPM_PACKAGE_NAME}}
+      
       - name: Cache node modules
         id: cache-yarn
         uses: actions/cache@v3
