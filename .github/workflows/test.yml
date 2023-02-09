@@ -1,0 +1,15 @@
+name: Lint and test
+run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
+on:
+  workflow_dispatch:
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: actions/setup-node@v3
+        with: 
+          node-version: 16
+      - run: NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
+      - run: echo $NPM_PACKAGE_NAME
