@@ -43,7 +43,7 @@ jobs:
           registry-url: https://registry.npmjs.org/
           
       - run: echo ${{env.NPM_PACKAGE_VERSIONS}}
-      - run: echo ${{step.package.ouput.NPM_PACKAGE_VERSION}}
+      - run: echo ${{steps.package.ouput.NPM_PACKAGE_VERSION}}
 #       - name: Install
 #         run: yarn
 #       - name: Build lib
