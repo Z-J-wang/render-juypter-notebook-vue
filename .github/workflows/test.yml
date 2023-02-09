@@ -13,6 +13,6 @@ jobs:
         with: 
           node-version: 16
       - run: echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
-      - run: echo ${env.NPM_PACKAGE_NAME}
-      - run: echo ${env.CI}
+      - run: echo ${{env.NPM_PACKAGE_NAME}}
+      - run: echo ${{env.CI}}
 
