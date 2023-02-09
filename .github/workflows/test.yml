@@ -12,7 +12,7 @@ jobs:
       - uses: actions/setup-node@v3
         with: 
           node-version: 16
-      - run: $NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
+      - run: NPM_PACKAGE_NAME=$(node -p "require('./package.json').name")
       - run: echo $(node -p "require('./package.json').name")
       - run: echo $NPM_PACKAGE_NAME
       - run: echo ${NPM_PACKAGE_NAME}
