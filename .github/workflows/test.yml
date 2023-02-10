@@ -5,13 +5,14 @@ on:
   workflow_dispatch:
   
 jobs:
-  lint:
+  pre:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - run: |
           echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
           echo "NPM_PACKAGE_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
+          
       - name: 判断是否可以发布npm包
         id: allow-publish
         run: |
@@ -20,6 +21,21 @@ jobs:
           else
             echo "allow=false" >> $GITHUB_OUTPUT
           fi
-      - run: echo ${{ steps.allow-publish.outputs.allow }}
+          
+  lint-test:
+    needs: pre
+    if: ${{ steps.allow-publish.outputs.allow == true }}
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      - name: 安装 node
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16.14.x
+          cache: yarn
+      - run: yarn install
+      - run: yarn lint
+      - run: yarn test
+
   
 
