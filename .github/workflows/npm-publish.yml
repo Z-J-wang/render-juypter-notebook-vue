@@ -16,16 +16,16 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - name: 获取 package.json 的name和version
-        id: allow-publish
         run: |
           echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
           echo "NPM_PACKAGE_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
       - name: 判断是否可以发布npm包
+        id: allow-publish
         run: |
           if [[ "$(npm view ${env.NPM_PACKAGE_NAME} versions)" != *"'${env.NPM_PACKAGE_VERSION}'"* ]]; then
-            echo "allow=true" >> $GITHUB_OUTPUT
+            echo "allow=true"
           else
-            echo "allow=false" >> $GITHUB_OUTPUT
+            echo "allow=false"
             echo "${env.NPM_PACKAGE_NAME}的${env.NPM_PACKAGE_VERSION}版号已发布，请更新版号"
 
   lint-test:
