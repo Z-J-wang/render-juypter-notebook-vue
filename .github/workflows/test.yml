@@ -16,8 +16,14 @@ jobs:
           echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
           echo "NPM_PACKAGE_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
           
-      - run: echo "NPM_PACKAGE_VERSIONS='npm view ${{env.NPM_PACKAGE_NAME}} versions'" >> $GITHUB_ENV
-      - run: echo $(${{env.NPM_PACKAGE_VERSIONS}})
+      - run: |
+          if [[ "$(npm view ${NPM_PACKAGE_NAME} versions)" != *"'${NPM_PACKAGE_VERSION}'"* ]]; then
+            npm publish
+            echo "Successfully published version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} to GitLab's NPM registry"
+          else
+            echo "Version ${NPM_PACKAGE_VERSION} of ${NPM_PACKAGE_NAME} has already been published, so no new version has been published."
+          fi
+
 #       - name: test
 #         if: ${{ contains($(env.NPM_PACKAGE_VERSIONS), env.NPM_PACKAGE_VERSION) }}
 #         run: echo ${{env.NPM_PACKAGE_VERSION}}
