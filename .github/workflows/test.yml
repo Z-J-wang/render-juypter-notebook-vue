@@ -17,7 +17,7 @@ jobs:
           echo "NPM_PACKAGE_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
           
       - run: echo "NPM_PACKAGE_VERSIONS='npm view ${{env.NPM_PACKAGE_NAME}} versions'" >> $GITHUB_ENV
-      - run: echo $(env.NPM_PACKAGE_VERSIONS)
+      - run: echo $(${{env.NPM_PACKAGE_VERSIONS}})
 #       - name: test
 #         if: ${{ contains($(env.NPM_PACKAGE_VERSIONS), env.NPM_PACKAGE_VERSION) }}
 #         run: echo ${{env.NPM_PACKAGE_VERSION}}
