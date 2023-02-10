@@ -18,7 +18,7 @@ jobs:
       - name: 判断是否可以发布npm包
         id: allow-publish
         run: |
-          if [[ "$(npm view ${NPM_PACKAGE_NAME} versions)" != *"'${NPM_PACKAGE_VERSION}'"* ]]; then
+          if [[ "$(npm view ${env.NPM_PACKAGE_NAME} versions)" != *"'${env.NPM_PACKAGE_VERSION}'"* ]]; then
             echo "allow=true" >> $GITHUB_OUTPUT
           else
             echo "allow=false" >> $GITHUB_OUTPUT
