@@ -29,12 +29,7 @@ jobs:
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v3
-      - name: 安装 node
-        uses: actions/setup-node@v3
-        with:
-          node-version: 16.14.x
-          cache: yarn
-      - run: echo ${{needs.pre.outputs.allow}}
+      - run: echo ${{needs.pre.outputs.output1}}
 #       - run: yarn install
 #       - run: yarn lint
 #       - run: yarn test
