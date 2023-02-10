@@ -26,6 +26,7 @@ jobs:
             echo "allow=true" >> $GITHUB_OUTPUT
           else
             echo "allow=false" >> $GITHUB_OUTPUT
+            echo "发布失败！${{env.NPM_PACKAGE_NAME}}的${{env.NPM_PACKAGE_VERSION}}版本已经发布！请更新版本号！！"
           fi
 
   lint-test:
