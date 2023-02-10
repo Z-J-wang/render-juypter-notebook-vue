@@ -31,9 +31,12 @@ jobs:
     steps: 
       - uses: actions/checkout@v3
       - run: echo ${{needs.pre.outputs.output1}}
-#       - run: yarn install
-#       - run: yarn lint
-#       - run: yarn test
+  publish:
+    needs: [lint-test,pre]
+    runs-on: ubuntu-latest
+    steps: 
+      - uses: actions/checkout@v3
+      - run: echo ${{needs.pre.outputs.output1}}
 
   
 
