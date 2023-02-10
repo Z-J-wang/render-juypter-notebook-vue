@@ -21,6 +21,7 @@ jobs:
             echo "allow=true" >> $GITHUB_OUTPUT
           else
             echo "allow=false" >> $GITHUB_OUTPUT
+            echo "asdada"
           fi
           
   lint-test:
