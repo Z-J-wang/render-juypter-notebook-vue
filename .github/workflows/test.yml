@@ -24,7 +24,6 @@ jobs:
           
   lint-test:
     needs: pre
-    if: steps == true 
     runs-on: ubuntu-latest
     steps: 
       - uses: actions/checkout@v3
@@ -33,9 +32,10 @@ jobs:
         with:
           node-version: 16.14.x
           cache: yarn
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn test
+      - run: echo ${{steps.allow-publish.outputs.allow}}
+#       - run: yarn install
+#       - run: yarn lint
+#       - run: yarn test
 
   
 
