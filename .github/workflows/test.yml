@@ -23,6 +23,6 @@ jobs:
           else
             echo "allow=false" >> $GITHUB_OUTPUT
           fi
-      - run: echo ${{ steps.allow-publish.outpus.allow }}
+      - run: echo ${{ steps.allow-publish.outputs.allow }}
   
 
