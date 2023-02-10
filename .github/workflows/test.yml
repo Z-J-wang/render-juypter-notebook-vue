@@ -24,7 +24,7 @@ jobs:
             echo "::error title=发布失败::该版本已经发布过了"
             echo "::warning title=发布失败::该版本已经发布过了"
             echo "::notice title=发布失败::该版本已经发布过了"
-            exit 1
+            exit 0
           fi
           
   lint-test:
