@@ -11,7 +11,7 @@ export default {
     notebook: { required: true, type: Object },
   },
   async mounted() {
-    const notebook = new Notebook(this.notebook, true);
+    const notebook = new Notebook(this.notebook, false);
     const fragment = await notebook.render();
     this.$refs.NotebookFragment.appendChild(fragment);
   },

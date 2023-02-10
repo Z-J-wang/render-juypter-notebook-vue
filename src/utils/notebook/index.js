@@ -19,7 +19,7 @@ export class Notebook {
   #cells; // notebook cell列表;cell表示一个最基础的渲染单元，例如inputCell,outputCell,outputResultCell
   #node; // inputCell和outputCell对应的div
   #fragment; // notebook 渲染结果片段，是个div元素
-  #trusted; // 当前渲染字符是安全或者但求运行环境是否可信，涉及HTML,SVG渲染
+  #trusted; // 当前渲染字符是安全或者但求运行环境是否可信，涉及Script,SVG渲染
   #sanitizer; // 字符串无害化处理
   #shouldTypeset; // 是否对数学公式字符进行latex排版,这里默认为true
   #latexTypesetter; // latex 插件实例
@@ -28,7 +28,7 @@ export class Notebook {
   /**
    * 构造函数
    * @param {Object} sourceOfJson Notebook 源数据，JSON 对象
-   * @param {Boolean} trusted 当前渲染字符是安全或者但求运行环境是否可信，涉及HTML,SVG渲染,默认为False
+   * @param {Boolean} trusted 当前渲染字符是安全或者当前运行环境是否可信，涉及Script,SVG渲染,默认为False
    * @param {Boolean} shouldTypeset 是否对数学公式字符进行latex排版,默认为true
    * @param {*} markdownParser markdown 渲染工具
    */
@@ -38,10 +38,10 @@ export class Notebook {
     this.#source = JSON.parse(JSON.stringify(source));
     const { cells } = this.#source;
     this.#cells = cells;
-    this.#fragment = document.createElement("div"); // 创建一个新的空白的div，notebook 渲染的结果都暂时存储在其中
+    this.#fragment = document.createElement("div"); // 创建一个新的空白的div片段，notebook渲染的结果都暂时存储在其中
 
     /*---------- 默认配置项 START ----------*/
-    this.#trusted = trusted || false; // 当前渲染字符是安全或者但求运行环境是否可信，涉及HTML,SVG渲染
+    this.#trusted = trusted || false; // 当前运行环境是否安全可信，涉及Script,SVG渲染
     this.#sanitizer = defaultSanitizer; // 字符串无害化处理
     this.#shouldTypeset = shouldTypeset || true; // 是否对数学公式字符进行latex排版,这里默认为true
     this.#latexTypesetter = new MathJaxTypesetter({
@@ -69,22 +69,26 @@ export class Notebook {
    * @returns {DocumentFragment} 返回一个 DocumentFragment 对象
    */
   async render() {
-    for (let cell of this.#cells) {
-      let node = null;
-      let { cell_type, source } = cell;
-      cell.source = typeof source === "string" ? source : source.join("");
-      switch (cell_type) {
-        case "markdown":
-          node = await this.#renderMarkdownCell(cell);
-          break;
-        case "code":
-          node = await this.#renderCodeCell(cell);
-          break;
-        case "raw":
-          node = await this.#renderRawCell(cell);
-          break;
+    try {
+      for (let cell of this.#cells) {
+        let node = null;
+        let { cell_type, source } = cell;
+        cell.source = typeof source === "string" ? source : source.join("");
+        switch (cell_type) {
+          case "markdown":
+            node = await this.#renderMarkdownCell(cell);
+            break;
+          case "code":
+            node = await this.#renderCodeCell(cell);
+            break;
+          case "raw":
+            node = await this.#renderRawCell(cell);
+            break;
+        }
+        this.#fragment.appendChild(node);
       }
-      this.#fragment.appendChild(node);
+    } catch (error) {
+      console.error(error);
     }
     return this.#fragment;
   }
@@ -166,13 +170,8 @@ export class Notebook {
     let node = null;
     let { source, outputs, execution_count: executionCount } = cell;
     let contentNode = document.createElement("div");
-    contentNode.classList = [
-      "lm-Widget",
-      "p-Widget",
-      "jp-Cell",
-      "jp-CodeCell",
-      "jp-Notebook-cell",
-    ];
+    contentNode.className =
+      "lm-Widget p-Widget jp-Cell jp-CodeCell jp-Notebook-cell ";
     createCodemirror(source, contentNode); // input代码块渲染
     node = this.#createContainerNode("inputCode", contentNode, executionCount);
     await this.#renderOutputCell(outputs, contentNode.parentNode.parentNode);

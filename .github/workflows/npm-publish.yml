@@ -1,30 +1,52 @@
 # This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
-name: Publish Npm
+name: Publish Package to npmjs
 
 on:
-  pull_request:
-    branches:
-      - master
-  push:
-    branches:
-      - master
+  release:
+    types: [created]
   workflow_dispatch:
 
 jobs:
-  lint:
+  pre:
+    runs-on: ubuntu-latest
+    outputs:
+      allow: ${{ steps.allow-publish.outputs.allow }}
+    steps:
+      - uses: actions/checkout@v3
+      - name: 获取 package.json 的name和version
+        run: |
+          echo "NPM_PACKAGE_NAME=$(node -p 'require("./package.json").name')" >> $GITHUB_ENV
+          echo "NPM_PACKAGE_VERSION=$(node -p 'require("./package.json").version')" >> $GITHUB_ENV
+      - name: 判断是否可以发布npm包
+        id: allow-publish
+        run: |
+          if [[ "$(npm view ${{env.NPM_PACKAGE_NAME}} versions)" != *"'${{env.NPM_PACKAGE_VERSION}}'"* ]]; then
+            echo "allow=true" >> $GITHUB_OUTPUT
+          else
+            echo "allow=false" >> $GITHUB_OUTPUT
+            echo "::error title=发布失败::${{env.NPM_PACKAGE_NAME}}的${{env.NPM_PACKAGE_VERSION}}版本已经发布！请更新版本号！！"
+            exit 1
+          fi
+
+  lint-test:
+    needs: pre
+    if: needs.pre.outputs.allow == true
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - uses: actions/setup-node@v3
         with:
           node-version: 16
-      - run: npm install
-      - run: npm run lint
+          cache: yarn
+      - name: lint
+        run: yarn lint
+      - name: test
+        run: yarn test
 
-  publish-npm:
-    needs: lint
+  publish:
+    needs: lint-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -32,8 +54,17 @@ jobs:
         with:
           node-version: 16
           registry-url: https://registry.npmjs.org/
-      - run: npm install
-      - run: npm run build:lib
-      - run: npm publish
+          cache: yarn
+
+      - name: Install
+        run: yarn
+      - name: Build lib
+        run: |
+          yarn build:lib
+          yarn build:lib-notebook
+      - name: Publish
+        run: |
+          yarn publish
+          echo "发布成功"
         env:
-          NODE_AUTH_TOKEN: ${{secrets.npm_token}}
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
