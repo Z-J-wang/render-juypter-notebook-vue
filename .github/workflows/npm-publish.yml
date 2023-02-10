@@ -45,7 +45,7 @@ jobs:
         run: yarn test
 
   publish:
-    needs: lint
+    needs: lint-test
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
