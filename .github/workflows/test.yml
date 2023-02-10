@@ -18,6 +18,6 @@ jobs:
           
       - run: echo "NPM_PACKAGE_VERSIONS=npm view ${{env.NPM_PACKAGE_NAME}} versions" >> $GITHUB_ENV
       - run: echo ${{env.NPM_PACKAGE_VERSIONS}}
-      - name: test
+#       - name: test
 #         if: ${{    }}
 
