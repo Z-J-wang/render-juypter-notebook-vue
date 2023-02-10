@@ -22,11 +22,11 @@ jobs:
       - name: 判断是否可以发布npm包
         id: allow-publish
         run: |
-          if [[ "$(npm view ${env.NPM_PACKAGE_NAME} versions)" != *"'${env.NPM_PACKAGE_VERSION}'"* ]]; then
+          if [[ "$(npm view ${NPM_PACKAGE_NAME} versions)" != *"'${NPM_PACKAGE_VERSION}'"* ]]; then
             echo "allow=true" >> $GITHUB_OUTPUT
           else
             echo "allow=false" >> $GITHUB_OUTPUT
-            # echo "${env.NPM_PACKAGE_NAME}的${env.NPM_PACKAGE_VERSION}版号已发布，请更新版号"
+            echo "${env.NPM_PACKAGE_NAME}的${env.NPM_PACKAGE_VERSION}版号已发布，请更新版号"
 
   lint-test:
     needs: pre
