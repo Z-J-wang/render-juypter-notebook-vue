@@ -26,7 +26,7 @@ jobs:
             echo "allow=true" >> $GITHUB_OUTPUT
           else
             echo "allow=false" >> $GITHUB_OUTPUT
-            echo "${env.NPM_PACKAGE_NAME}的${env.NPM_PACKAGE_VERSION}版号已发布，请更新版号"
+            # echo "${env.NPM_PACKAGE_NAME}的${env.NPM_PACKAGE_VERSION}版号已发布，请更新版号"
 
   lint-test:
     needs: pre
