@@ -21,7 +21,9 @@ jobs:
             echo "allow=true" >> $GITHUB_OUTPUT
           else
             echo "allow=false" >> $GITHUB_OUTPUT
-            echo "::error::发布失败"
+            echo "::error title=发布失败::该版本已经发布过了"
+            echo "::warning title=发布失败::该版本已经发布过了"
+            echo "::notice title=发布失败::该版本已经发布过了"
           fi
           
   lint-test:
