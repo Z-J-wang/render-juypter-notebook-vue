@@ -6,7 +6,7 @@
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
   "main": "./lib/RenderJupyterNotebook/index.umd.min.js",
   "author": "wangzhijie <1356573671@qq.com>",
-  "description": "render-jupyter-notebook-vue is a vue component that implements rendering of notebook files in vue. render-jupyter-notebook-vue是一个vue组件，实现了notebook文件的渲染在vue中的渲染。",
+  "description": "The render-jupyter-notebook-vue is a vue component that renders the notebook file in vue. render-jupyter-notebook-vue是一个vue组件，实现了notebook文件在vue中的渲染。",
   "keywords": [
     "notebook",
     ".ipynb",
