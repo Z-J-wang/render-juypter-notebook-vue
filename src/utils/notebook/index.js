@@ -16,7 +16,6 @@ import defaultMarkdownParser from "./markdown.js"; // 引入cngbdb-ui的markdown
 export class Notebook {
   #source; // notebook源数据
   #cells; // notebook cell列表;cell表示一个最基础的渲染单元，例如inputCell,outputCell,outputResultCell
-  #node; // inputCell和outputCell对应的div
   #fragment; // notebook 渲染结果片段，是个div元素
   #trusted; // 当前渲染字符是安全或者但求运行环境是否可信，涉及Script,SVG渲染
   #sanitizer; // 字符串无害化处理
