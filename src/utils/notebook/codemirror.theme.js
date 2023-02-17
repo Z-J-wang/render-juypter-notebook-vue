@@ -6,9 +6,6 @@
  * 用于设置 codemirror 相关的主题，提供了 codemirror 以及 jupyter 两种主题。其中 jupyter 为默认主题
  *
  * 源码TS版：https://github.com/jupyterlab/jupyterlab/blob/master/packages/codemirror/src/editortheme.ts
- *
- * @author [王志杰]
- * @date 2022-11-24
  */
 
 import {
