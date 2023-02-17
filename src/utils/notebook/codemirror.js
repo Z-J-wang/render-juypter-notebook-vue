@@ -1,10 +1,6 @@
 /**
  * 调用 codemirror 插件渲染code，并调用 jupyterlab 的 codemirror 主题样式做渲染
  * codemirror 插件： https://codemirror.net/
- *
- * @module
- * @author [王志杰]
- * @date 2022-11-24
  */
 
 import { EditorState } from "@codemirror/state";
