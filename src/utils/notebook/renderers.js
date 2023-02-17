@@ -13,9 +13,6 @@
  *
  * 源码TS版：https://github.com/jupyterlab/jupyterlab/blob/master/packages/rendermime/src/renderers.ts
  *
- * @author [王志杰]
- * @date 2022-11-25
- *
  */
 
 import { removeMath, replaceMath } from "./latex";
