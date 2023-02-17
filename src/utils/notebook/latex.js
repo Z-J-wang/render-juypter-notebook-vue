@@ -14,9 +14,6 @@
  * 用于 latex 字符渲染
  *
  * 源码TS版：https://github.com/jupyterlab/jupyterlab/blob/master/packages/rendermime/src/latex.ts
- *
- * @author [王志杰]
- * @date 2022-11-24
  */
 
 const inline = "$"; // the inline math delimiter
