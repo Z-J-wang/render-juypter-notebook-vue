@@ -8,9 +8,6 @@
  * 用于字符串无害化处理
  *
  * 源码TS版：https://github.com/jupyterlab/jupyterlab/blob/master/packages/apputils/src/sanitizer.ts
- *
- * @author [王志杰]
- * @date 2022-11-24
  */
 
 import sanitize from "sanitize-html";
