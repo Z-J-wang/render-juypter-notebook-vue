@@ -112,7 +112,7 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 ## Class Notebook 更多说明
 
-更多有关于`Class Notebook`说明，请查看：
+更多有关于`Class Notebook`说明，请查看：[根据 Jupyter-lab 源码实现 notebook（.ipynb）在页面中的渲染_jupyter 源码](https://blog.csdn.net/weixin_44869002/article/details/129008963)
 
 # Author
 
