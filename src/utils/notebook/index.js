@@ -14,14 +14,14 @@ import {
 import defaultMarkdownParser from "./markdown.js"; // 引入cngbdb-ui的markdown渲染逻辑
 
 export class Notebook {
-  #source; // notebook源数据
-  #cells; // notebook cell列表;cell表示一个最基础的渲染单元，例如inputCell,outputCell,outputResultCell
-  #fragment; // notebook 渲染结果片段，是个div元素
-  #trusted; // 当前渲染字符是安全或者但求运行环境是否可信，涉及Script,SVG渲染
-  #sanitizer; // 字符串无害化处理
-  #shouldTypeset; // 是否对数学公式字符进行latex排版,这里默认为true
-  #latexTypesetter; // latex 插件实例
-  #markdownParser; // markdown 渲染工具
+  _source; // notebook源数据
+  _cells; // notebook cell列表;cell表示一个最基础的渲染单元，例如inputCell,outputCell,outputResultCell
+  _fragment; // notebook 渲染结果片段，是个div元素
+  _trusted; // 当前渲染字符是安全或者但求运行环境是否可信，涉及Script,SVG渲染
+  _sanitizer; // 字符串无害化处理
+  _shouldTypeset; // 是否对数学公式字符进行latex排版,这里默认为true
+  _latexTypesetter; // latex 插件实例
+  _markdownParser; // markdown 渲染工具
 
   /**
    * 构造函数
@@ -33,26 +33,26 @@ export class Notebook {
   constructor(source, trusted, shouldTypeset, markdownParser) {
     if (!source.cells || !(source.cells instanceof Array))
       throw "The Notebook is Error! Cells attribute is required and is Array!";
-    this.#source = JSON.parse(JSON.stringify(source));
-    const { cells } = this.#source;
-    this.#cells = cells;
-    this.#fragment = document.createElement("div"); // 创建一个新的空白的div片段，notebook渲染的结果都暂时存储在其中
+    this._source = JSON.parse(JSON.stringify(source));
+    const { cells } = this._source;
+    this._cells = cells;
+    this._fragment = document.createElement("div"); // 创建一个新的空白的div片段，notebook渲染的结果都暂时存储在其中
 
     /*---------- 默认配置项 START ----------*/
-    this.#trusted = trusted || false; // 当前运行环境是否安全可信，涉及Script,SVG渲染
-    this.#sanitizer = defaultSanitizer; // 字符串无害化处理
-    this.#shouldTypeset = shouldTypeset || true; // 是否对数学公式字符进行latex排版,这里默认为true
-    this.#latexTypesetter = new MathJaxTypesetter({
+    this._trusted = trusted || false; // 当前运行环境是否安全可信，涉及Script,SVG渲染
+    this._sanitizer = defaultSanitizer; // 字符串无害化处理
+    this._shouldTypeset = shouldTypeset || true; // 是否对数学公式字符进行latex排版,这里默认为true
+    this._latexTypesetter = new MathJaxTypesetter({
       url: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js",
       config: "TeX-AMS_HTML-full,Safe",
     }); // latex 插件实例化
-    this.#markdownParser = markdownParser || defaultMarkdownParser; // markdown 渲染工具
+    this._markdownParser = markdownParser || defaultMarkdownParser; // markdown 渲染工具
     /*---------- 默认配置项 END ----------*/
   }
 
   // notebook渲染成HTML的结果
   get notebookHTML() {
-    return this.#fragment;
+    return this._fragment;
   }
 
   /**
@@ -68,27 +68,27 @@ export class Notebook {
    */
   async render() {
     try {
-      for (let cell of this.#cells) {
+      for (let cell of this._cells) {
         let node = null;
         let { cell_type, source } = cell;
         cell.source = typeof source === "string" ? source : source.join("");
         switch (cell_type) {
           case "markdown":
-            node = await this.#renderMarkdownCell(cell);
+            node = await this._renderMarkdownCell(cell);
             break;
           case "code":
-            node = await this.#renderCodeCell(cell);
+            node = await this._renderCodeCell(cell);
             break;
           case "raw":
-            node = await this.#renderRawCell(cell);
+            node = await this._renderRawCell(cell);
             break;
         }
-        this.#fragment.appendChild(node);
+        this._fragment.appendChild(node);
       }
     } catch (error) {
       console.error(error);
     }
-    return this.#fragment;
+    return this._fragment;
   }
 
   /**
@@ -97,13 +97,13 @@ export class Notebook {
    * @param {string} param0 type-数据模块类型，所支持的类型为output_type全部类型‘
    * @param {object} param1 options-渲染模块所需的参数
    */
-  async #renderCommonCell({ type, options }) {
+  async _renderCommonCell({ type, options }) {
     // 对未设置的配置项，设置为全局默认配置对应的属性值
-    options.trusted = options.trusted || this.#trusted;
-    options.sanitizer = options.sanitizer || this.#sanitizer;
-    options.shouldTypeset = options.shouldTypeset || this.#shouldTypeset;
-    options.latexTypesetter = options.latexTypesetter || this.#latexTypesetter;
-    options.markdownParser = options.markdownParser || this.#markdownParser;
+    options.trusted = options.trusted || this._trusted;
+    options.sanitizer = options.sanitizer || this._sanitizer;
+    options.shouldTypeset = options.shouldTypeset || this._shouldTypeset;
+    options.latexTypesetter = options.latexTypesetter || this._latexTypesetter;
+    options.markdownParser = options.markdownParser || this._markdownParser;
 
     switch (type) {
       case "text/html":
@@ -146,14 +146,14 @@ export class Notebook {
    * 渲染markdown DOM
    * @param {Object} cell
    */
-  async #renderMarkdownCell(cell) {
+  async _renderMarkdownCell(cell) {
     let { source, execution_count: executionCount } = cell;
     let contentNode = document.createElement("div");
-    await this.#renderCommonCell({
+    await this._renderCommonCell({
       type: "text/markdown",
       options: { host: contentNode, source: source },
     });
-    return this.#createContainerNode(
+    return this._createContainerNode(
       "inputMarkdown",
       contentNode,
       executionCount
@@ -164,23 +164,23 @@ export class Notebook {
    * 渲染Code DOM
    * @param {Object} cell
    */
-  async #renderCodeCell(cell) {
+  async _renderCodeCell(cell) {
     let node = null;
     let { source, outputs, execution_count: executionCount } = cell;
     let contentNode = document.createElement("div");
     contentNode.className =
       "lm-Widget p-Widget jp-Cell jp-CodeCell jp-Notebook-cell ";
     createCodemirror(source, contentNode); // input代码块渲染
-    node = this.#createContainerNode("inputCode", contentNode, executionCount);
-    await this.#renderOutputCell(outputs, contentNode.parentNode.parentNode);
+    node = this._createContainerNode("inputCode", contentNode, executionCount);
+    await this._renderOutputCell(outputs, contentNode.parentNode.parentNode);
 
     return node;
   }
 
-  async #renderRawCell(cell) {
+  async _renderRawCell(cell) {
     let { source } = cell;
     let node = document.createElement("div");
-    await this.#renderCommonCell({
+    await this._renderCommonCell({
       type: "text/plain",
       options: { host: node, source: source },
     });
@@ -191,7 +191,7 @@ export class Notebook {
    * 渲染 outputs
    * @param {Array} outputs
    */
-  async #renderOutputCell(outputs, parentNode) {
+  async _renderOutputCell(outputs, parentNode) {
     if (!outputs || !outputs.length) return;
     const OutputAreaNode = document.createElement("div");
     OutputAreaNode.className =
@@ -204,13 +204,13 @@ export class Notebook {
           sources = output.text;
           for (const source of sources) {
             let node = document.createElement("div");
-            await this.#renderCommonCell({
+            await this._renderCommonCell({
               type: "application/vnd.jupyter." + output.name,
               options: { host: node, source: source },
             });
 
             OutputAreaNode.appendChild(
-              this.#createContainerNode(
+              this._createContainerNode(
                 "application/vnd.jupyter." + output.name,
                 node,
                 ""
@@ -228,13 +228,13 @@ export class Notebook {
           if (!source) return;
           let node = document.createElement("div");
           source = typeof source === "string" ? source : source.join("\n");
-          await this.#renderCommonCell({
+          await this._renderCommonCell({
             type: key,
             options: { host: node, source: source },
           });
 
           OutputAreaNode.appendChild(
-            this.#createContainerNode(key, node, executionCount)
+            this._createContainerNode(key, node, executionCount)
           );
           break;
         }
@@ -242,12 +242,12 @@ export class Notebook {
           sources = output.traceback;
           for (const source of sources) {
             let node = document.createElement("div");
-            await this.#renderCommonCell({
+            await this._renderCommonCell({
               type: "application/vnd.jupyter.stderr",
               options: { host: node, source: source },
             });
             OutputAreaNode.appendChild(
-              this.#createContainerNode(
+              this._createContainerNode(
                 "application/vnd.jupyter.stderr",
                 node,
                 ""
@@ -259,7 +259,7 @@ export class Notebook {
     }
   }
 
-  #createContainerNode(type, contentNode, executionCount) {
+  _createContainerNode(type, contentNode, executionCount) {
     let node = document.createElement("div");
     let areaNode = document.createElement("div");
     let promptNode = document.createElement("div");
