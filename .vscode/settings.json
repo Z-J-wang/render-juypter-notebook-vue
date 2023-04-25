@@ -13,7 +13,6 @@
   "eslint.format.enable": true,
   "path-intellisense.mappings": {
     "/": "${workspaceFolder}",
-    "@": "${workspaceFolder}/src",
     "src": "${workspaceFolder}/src",
     "components": "${workspaceFolder}/src/components",
     "layouts": "${workspaceFolder}/src/layouts",
@@ -22,7 +21,6 @@
     "pages": "${workspaceFolder}/src/pages"
   },
   "path-autocomplete.pathMappings": {
-    "@": "${folder}/src",
     "src": "${folder}/src",
     "components": "${folder}/src/components",
     "layouts": "${folder}/src/layouts",
