@@ -1,8 +1,8 @@
 import { describe, expect, it } from "vitest";
 import { mount } from "@vue/test-utils";
-import RenderJupyterNotebook from "@/components/RenderJupyterNotebook.vue";
-import example from "@/assets/OutputExamples";
-import { Notebook } from "@/utils";
+import RenderJupyterNotebook from "../src/components/RenderJupyterNotebook.vue";
+import example from "../src/assets/OutputExamples";
+import { Notebook } from "../src/utils";
 
 describe("notebook渲染相关测试", () => {
   it("RenderJupyterNotebook 组件测试", () => {

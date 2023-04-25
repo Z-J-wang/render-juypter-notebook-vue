@@ -1,6 +1,6 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "1.0.1",
+  "version": "2.0.0-beta.1",
   "license": "MIT",
   "homepage": "https://github.com/Z-J-wang/render-juypter-notebook-vue#readme",
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
@@ -36,8 +36,17 @@
     "@jupyterlab/theme-light-extension": "^3.5.0",
     "core-js": "^3.8.3",
     "markdown-it": "^13.0.1",
-    "vue": "^3.2.13",
+    "vue-demi": "latest",
     "vue-router": "^4.0.3"
+  },
+  "peerDependencies": {
+    "@vue/composition-api": "^1.0.0-beta.1",
+    "vue": "^2.0.0 || >=3.0.0-rc.0"
+  },
+  "peerDependenciesMeta": {
+    "@vue/composition-api": {
+      "optional": true
+    }
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -58,7 +67,8 @@
     "less-loader": "^8.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
-    "vitest": "^0.28.4"
+    "vitest": "^0.28.4",
+    "vue": "^3.0.0"
   },
   "gitHooks": {
     "pre-commit": "lint-staged"
