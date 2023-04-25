@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import { Notebook } from "@/utils/index";
+import { Notebook } from "../utils/index";
 
 export default {
   name: "RenderJupyterNotebook",

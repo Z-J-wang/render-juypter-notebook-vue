@@ -36,7 +36,7 @@ RenderJupyterNotebook组件仅接收一个参数：`notebook`。它是notebook�
 
 <script>
 import RenderJupyterNotebook from "render-jupyter-notebook-vue";
-import example from "@/assets/OutputExamples.json";
+import example from "../assets/OutputExamples.json";
 
 export default {
   name: "HomeView",

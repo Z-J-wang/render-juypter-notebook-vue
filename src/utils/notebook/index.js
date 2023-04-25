@@ -1,5 +1,5 @@
 import "@jupyterlab/theme-light-extension/style/theme.css";
-import "@/assets/css/jupyterlab/index.css";
+import "../../assets/css/jupyterlab/index.css";
 import { createCodemirror } from "./codemirror";
 import { defaultSanitizer } from "./sanitizer";
 import { MathJaxTypesetter } from "@jupyterlab/mathjax2";

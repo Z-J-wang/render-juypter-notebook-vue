@@ -5,8 +5,8 @@
 </template>
 
 <script>
-import RenderJupyterNotebook from "@/components/RenderJupyterNotebook";
-import example from "@/assets/OutputExamples";
+import RenderJupyterNotebook from "../components/RenderJupyterNotebook";
+import example from "../assets/OutputExamples";
 
 export default {
   name: "HomeView",
