@@ -1,6 +1,6 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "2.0.0-beta.1",
+  "version": "2.0.0-beta.2",
   "license": "MIT",
   "homepage": "https://github.com/Z-J-wang/render-juypter-notebook-vue#readme",
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
@@ -51,7 +51,6 @@
   "devDependencies": {
     "@babel/core": "^7.12.16",
     "@babel/eslint-parser": "^7.12.16",
-    "@babel/plugin-proposal-private-methods": "^7.18.6",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
