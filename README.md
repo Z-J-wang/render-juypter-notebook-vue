@@ -1,10 +1,12 @@
 # 介绍
 
-RenderJupyterNotebook是一个 vue 组件，实现了：**通过JavaScript还原渲染jupyter notebook**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于JupyterLab并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
+RenderJupyterNotebook是一个 vue 3.x 组件，实现了：**通过JavaScript还原渲染jupyter notebook**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于JupyterLab并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
 
 # 使用
 
 > RenderJupyterNotebook组件已经发布到npm。链接：[render-jupyter-notebook-vue - npm (npmjs.com)](https://www.npmjs.com/package/render-jupyter-notebook-vue)
+
+> RenderJupyterNotebook组件是基于vue3.x编写的，所以打包后的文件（即，lib/中的文件）只适合vue3.x项目。如果vue2.x要使用RenderJupyterNotebook组件，请看**在vue2.x中的使用说明**。
 
 ## 安装render-jupyter-notebook-vue插件
 
@@ -35,7 +37,7 @@ RenderJupyterNotebook组件仅接收一个参数：`notebook`。它是notebook�
 </template>
 
 <script>
-import RenderJupyterNotebook from "render-jupyter-notebook-vue";
+import RenderJupyterNotebook from "render-jupyter-notebook-vue"; // vue 3.x 写法
 import example from "../assets/OutputExamples.json";
 
 export default {
@@ -64,6 +66,24 @@ import { Notebook } from "render-jupyter-notebook-vue/lib/Notebook/index.umd";
 const notebook = new Notebook(this.notebook, false);
 const fragment = await notebook.render();
 this.$refs.NotebookFragment.appendChild(fragment);
+```
+
+# 在vue2.x中的使用说明
+
+RenderJupyterNotebook组件是基于vue3.x编写的，所以打包后的文件（即，lib/中的文件）只适合vue3.x项目。如果vue2.x要使用RenderJupyterNotebook组件，需要直接引用为编译的代码。
+
+如下：
+
+```js
+import RenderJupyterNotebook from "render-jupyter-notebook-vue"; // vue 3.x 写法
+
+import RenderJupyterNotebook from "render-jupyter-notebook-vue/src/components/RenderJupyterNotebook.vue"; // vue 2.x 写法
+```
+
+Class Notebook 为纯Javascript，但同样可以调用未编译的代码来使用：
+
+```js
+import { Notebook } from "render-jupyter-notebook-vue/src/utils/index";
 ```
 
 # Class Notebook说明
