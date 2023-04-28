@@ -70,7 +70,7 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 # 在vue2.x中的使用说明
 
-RenderJupyterNotebook组件是基于vue3.x编写的，所以打包后的文件（即，lib/中的文件）只适合vue3.x项目。如果vue2.x要使用RenderJupyterNotebook组件，需要直接引用为编译的代码。
+RenderJupyterNotebook组件是基于vue3.x编写的，所以打包后的文件（即，lib/中的文件）只适合vue3.x项目。如果vue2.x要使用RenderJupyterNotebook组件，需要直接引用未编译的代码。
 
 如下：
 
