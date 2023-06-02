@@ -5,24 +5,24 @@
 </template>
 
 <script>
-import RenderJupyterNotebook from "../components/RenderJupyterNotebook";
-import example from "../assets/OutputExamples";
+import RenderJupyterNotebook from '../components/RenderJupyterNotebook';
+import example from '../assets/OutputExamples';
 
 export default {
-  name: "HomeView",
+  name: 'HomeView',
   components: { RenderJupyterNotebook },
   data() {
     return {
-      notebook: example,
+      notebook: example
     };
-  },
+  }
 };
 </script>
 
 <style lang="less" scoped>
 .home {
-  width: 1200px;
   margin: 0 auto;
+  width: 1200px;
   background-color: white;
 }
 </style>

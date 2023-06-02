@@ -1,17 +1,10 @@
-import "@jupyterlab/theme-light-extension/style/theme.css";
-import "../../assets/css/jupyterlab/index.css";
-import { createCodemirror } from "./codemirror";
-import { defaultSanitizer } from "./sanitizer";
-import { MathJaxTypesetter } from "@jupyterlab/mathjax2";
-import {
-  renderHTML,
-  renderImage,
-  renderLatex,
-  renderMarkdown,
-  renderSVG,
-  renderText,
-} from "./renderers";
-import defaultMarkdownParser from "./markdown.js"; // 引入cngbdb-ui的markdown渲染逻辑
+import '@jupyterlab/theme-light-extension/style/theme.css';
+import '../../assets/css/jupyterlab/index.css';
+import { createCodemirror } from './codemirror';
+import { defaultSanitizer } from './sanitizer';
+import { MathJaxTypesetter } from '@jupyterlab/mathjax2';
+import { renderHTML, renderImage, renderLatex, renderMarkdown, renderSVG, renderText } from './renderers';
+import defaultMarkdownParser from './markdown.js'; // 引入cngbdb-ui的markdown渲染逻辑
 
 export class Notebook {
   _source; // notebook源数据
@@ -32,19 +25,19 @@ export class Notebook {
    */
   constructor(source, trusted, shouldTypeset, markdownParser) {
     if (!source.cells || !(source.cells instanceof Array))
-      throw "The Notebook is Error! Cells attribute is required and is Array!";
+      throw 'The Notebook is Error! Cells attribute is required and is Array!';
     this._source = JSON.parse(JSON.stringify(source));
     const { cells } = this._source;
     this._cells = cells;
-    this._fragment = document.createElement("div"); // 创建一个新的空白的div片段，notebook渲染的结果都暂时存储在其中
+    this._fragment = document.createElement('div'); // 创建一个新的空白的div片段，notebook渲染的结果都暂时存储在其中
 
     /*---------- 默认配置项 START ----------*/
     this._trusted = trusted || false; // 当前运行环境是否安全可信，涉及Script,SVG渲染
     this._sanitizer = defaultSanitizer; // 字符串无害化处理
     this._shouldTypeset = shouldTypeset || true; // 是否对数学公式字符进行latex排版,这里默认为true
     this._latexTypesetter = new MathJaxTypesetter({
-      url: "https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js",
-      config: "TeX-AMS_HTML-full,Safe",
+      url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js',
+      config: 'TeX-AMS_HTML-full,Safe'
     }); // latex 插件实例化
     this._markdownParser = markdownParser || defaultMarkdownParser; // markdown 渲染工具
     /*---------- 默认配置项 END ----------*/
@@ -71,15 +64,15 @@ export class Notebook {
       for (let cell of this._cells) {
         let node = null;
         let { cell_type, source } = cell;
-        cell.source = typeof source === "string" ? source : source.join("");
+        cell.source = typeof source === 'string' ? source : source.join('');
         switch (cell_type) {
-          case "markdown":
+          case 'markdown':
             node = await this._renderMarkdownCell(cell);
             break;
-          case "code":
+          case 'code':
             node = await this._renderCodeCell(cell);
             break;
-          case "raw":
+          case 'raw':
             node = await this._renderRawCell(cell);
             break;
         }
@@ -106,35 +99,35 @@ export class Notebook {
     options.markdownParser = options.markdownParser || this._markdownParser;
 
     switch (type) {
-      case "text/html":
+      case 'text/html':
         await renderHTML(options);
         break;
-      case "markdown":
-      case "text/markdown":
+      case 'markdown':
+      case 'text/markdown':
         await renderMarkdown(options);
         break;
-      case "text/plain":
-      case "application/vnd.jupyter.stdout":
-      case "application/vnd.jupyter.stderr":
+      case 'text/plain':
+      case 'application/vnd.jupyter.stdout':
+      case 'application/vnd.jupyter.stderr':
         await renderText(options);
         break;
-      case "text/latex":
+      case 'text/latex':
         await renderLatex(options);
         break;
-      case "image/bmp":
-      case "image/png":
-      case "image/jpeg":
-      case "image/gif":
-      case "image/webp":
+      case 'image/bmp':
+      case 'image/png':
+      case 'image/jpeg':
+      case 'image/gif':
+      case 'image/webp':
         await renderImage(options);
         break;
-      case "image/svg+xml":
+      case 'image/svg+xml':
         await renderSVG(options);
         break;
-      case "text/javascript":
-      case "application/javascript":
+      case 'text/javascript':
+      case 'application/javascript':
         // 禁止输出 JavaScript
-        options.source = "JavaScript output is disabled in JupyterLab";
+        options.source = 'JavaScript output is disabled in JupyterLab';
         await renderText(options);
         break;
       default:
@@ -148,16 +141,12 @@ export class Notebook {
    */
   async _renderMarkdownCell(cell) {
     let { source, execution_count: executionCount } = cell;
-    let contentNode = document.createElement("div");
+    let contentNode = document.createElement('div');
     await this._renderCommonCell({
-      type: "text/markdown",
-      options: { host: contentNode, source: source },
+      type: 'text/markdown',
+      options: { host: contentNode, source: source }
     });
-    return this._createContainerNode(
-      "inputMarkdown",
-      contentNode,
-      executionCount
-    );
+    return this._createContainerNode('inputMarkdown', contentNode, executionCount);
   }
 
   /**
@@ -167,11 +156,10 @@ export class Notebook {
   async _renderCodeCell(cell) {
     let node = null;
     let { source, outputs, execution_count: executionCount } = cell;
-    let contentNode = document.createElement("div");
-    contentNode.className =
-      "lm-Widget p-Widget jp-Cell jp-CodeCell jp-Notebook-cell ";
+    let contentNode = document.createElement('div');
+    contentNode.className = 'lm-Widget p-Widget jp-Cell jp-CodeCell jp-Notebook-cell ';
     createCodemirror(source, contentNode); // input代码块渲染
-    node = this._createContainerNode("inputCode", contentNode, executionCount);
+    node = this._createContainerNode('inputCode', contentNode, executionCount);
     await this._renderOutputCell(outputs, contentNode.parentNode.parentNode);
 
     return node;
@@ -179,10 +167,10 @@ export class Notebook {
 
   async _renderRawCell(cell) {
     let { source } = cell;
-    let node = document.createElement("div");
+    let node = document.createElement('div');
     await this._renderCommonCell({
-      type: "text/plain",
-      options: { host: node, source: source },
+      type: 'text/plain',
+      options: { host: node, source: source }
     });
     return node;
   }
@@ -193,66 +181,51 @@ export class Notebook {
    */
   async _renderOutputCell(outputs, parentNode) {
     if (!outputs || !outputs.length) return;
-    const OutputAreaNode = document.createElement("div");
-    OutputAreaNode.className =
-      "lm-Widget jp-OutputArea jp-Cell-outputArea q-mt-sm";
+    const OutputAreaNode = document.createElement('div');
+    OutputAreaNode.className = 'lm-Widget jp-OutputArea jp-Cell-outputArea q-mt-sm';
     parentNode.appendChild(OutputAreaNode);
     for (let output of outputs) {
       let sources = [];
       switch (output.output_type) {
-        case "stream": // 文本流输出
+        case 'stream': // 文本流输出
           sources = output.text;
           for (const source of sources) {
-            let node = document.createElement("div");
+            let node = document.createElement('div');
             await this._renderCommonCell({
-              type: "application/vnd.jupyter." + output.name,
-              options: { host: node, source: source },
+              type: 'application/vnd.jupyter.' + output.name,
+              options: { host: node, source: source }
             });
 
-            OutputAreaNode.appendChild(
-              this._createContainerNode(
-                "application/vnd.jupyter." + output.name,
-                node,
-                ""
-              )
-            );
+            OutputAreaNode.appendChild(this._createContainerNode('application/vnd.jupyter.' + output.name, node, ''));
           }
           break;
-        case "display_data":
-        case "execute_result": {
+        case 'display_data':
+        case 'execute_result': {
           // 富文本输出
           const { data: outputData, execution_count: executionCount } = output;
           const keys = Object.keys(outputData);
           const key = keys[0];
           let source = outputData[key];
           if (!source) return;
-          let node = document.createElement("div");
-          source = typeof source === "string" ? source : source.join("\n");
+          let node = document.createElement('div');
+          source = typeof source === 'string' ? source : source.join('\n');
           await this._renderCommonCell({
             type: key,
-            options: { host: node, source: source },
+            options: { host: node, source: source }
           });
 
-          OutputAreaNode.appendChild(
-            this._createContainerNode(key, node, executionCount)
-          );
+          OutputAreaNode.appendChild(this._createContainerNode(key, node, executionCount));
           break;
         }
-        case "error": // 错误信息输出
+        case 'error': // 错误信息输出
           sources = output.traceback;
           for (const source of sources) {
-            let node = document.createElement("div");
+            let node = document.createElement('div');
             await this._renderCommonCell({
-              type: "application/vnd.jupyter.stderr",
-              options: { host: node, source: source },
+              type: 'application/vnd.jupyter.stderr',
+              options: { host: node, source: source }
             });
-            OutputAreaNode.appendChild(
-              this._createContainerNode(
-                "application/vnd.jupyter.stderr",
-                node,
-                ""
-              )
-            );
+            OutputAreaNode.appendChild(this._createContainerNode('application/vnd.jupyter.stderr', node, ''));
           }
           break;
       }
@@ -260,84 +233,62 @@ export class Notebook {
   }
 
   _createContainerNode(type, contentNode, executionCount) {
-    let node = document.createElement("div");
-    let areaNode = document.createElement("div");
-    let promptNode = document.createElement("div");
+    let node = document.createElement('div');
+    let areaNode = document.createElement('div');
+    let promptNode = document.createElement('div');
     if (executionCount || executionCount === null) {
-      promptNode.innerText = `[${
-        executionCount === null ? " " : executionCount
-      }]`;
+      promptNode.innerText = `[${executionCount === null ? ' ' : executionCount}]`;
     }
     // prompt class设置。prompt 样式分为input和output两种
-    ["inputMarkdown", "inputCode"].includes(type)
-      ? (promptNode.className =
-          "lm-Widget p-Widget jp-InputPrompt jp-InputArea-prompt")
-      : (promptNode.className =
-          "lm-Widget p-Widget jp-OutputPrompt jp-OutputArea-prompt");
+    ['inputMarkdown', 'inputCode'].includes(type)
+      ? (promptNode.className = 'lm-Widget p-Widget jp-InputPrompt jp-InputArea-prompt')
+      : (promptNode.className = 'lm-Widget p-Widget jp-OutputPrompt jp-OutputArea-prompt');
     switch (type) {
-      case "inputMarkdown": {
-        node.className =
-          "lm-Widget p-Widget jp-Cell jp-MarkdownCell jp-mod-rendered jp-Notebook-cell";
-        areaNode.className =
-          "lm-Widget p-Widget jp-InputArea jp-Cell-inputArea";
-        contentNode.className =
-          "lm-Widget p-Widget jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput";
-        contentNode.setAttribute("data-mime-type", "text/markdown");
+      case 'inputMarkdown': {
+        node.className = 'lm-Widget p-Widget jp-Cell jp-MarkdownCell jp-mod-rendered jp-Notebook-cell';
+        areaNode.className = 'lm-Widget p-Widget jp-InputArea jp-Cell-inputArea';
+        contentNode.className = 'lm-Widget p-Widget jp-RenderedHTMLCommon jp-RenderedMarkdown jp-MarkdownOutput';
+        contentNode.setAttribute('data-mime-type', 'text/markdown');
         break;
       }
-      case "inputCode": {
-        node.className =
-          "lm-Widget p-Widget jp-Cell jp-CodeCell jp-mod-noOutputs jp-Notebook-cell";
-        areaNode.className =
-          "lm-Widget p-Widget jp-InputArea jp-Cell-inputArea";
-        contentNode.className =
-          "lm-Widget p-Widget jp-CodeMirrorEditor jp-Editor jp-InputArea-editor";
+      case 'inputCode': {
+        node.className = 'lm-Widget p-Widget jp-Cell jp-CodeCell jp-mod-noOutputs jp-Notebook-cell';
+        areaNode.className = 'lm-Widget p-Widget jp-InputArea jp-Cell-inputArea';
+        contentNode.className = 'lm-Widget p-Widget jp-CodeMirrorEditor jp-Editor jp-InputArea-editor';
         break;
       }
-      case "application/vnd.jupyter.stdout": {
-        node.className = "lm-Widget lm-Panel jp-OutputArea-child";
-        areaNode.className =
-          "lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child";
-        contentNode.className =
-          "lm-Widget p-Widget jp-RenderedText jp-OutputArea-output";
-        contentNode.setAttribute(
-          "data-mime-type",
-          "application/vnd.jupyter.stdout"
-        );
+      case 'application/vnd.jupyter.stdout': {
+        node.className = 'lm-Widget lm-Panel jp-OutputArea-child';
+        areaNode.className = 'lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child';
+        contentNode.className = 'lm-Widget p-Widget jp-RenderedText jp-OutputArea-output';
+        contentNode.setAttribute('data-mime-type', 'application/vnd.jupyter.stdout');
         break;
       }
-      case "application/vnd.jupyter.stderr": {
-        node.className = "lm-Widget lm-Panel jp-OutputArea-child";
-        areaNode.className =
-          "lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child";
-        contentNode.className =
-          "lm-Widget p-Widget jp-RenderedText jp-OutputArea-output";
-        contentNode.setAttribute(
-          "data-mime-type",
-          "application/vnd.jupyter.stderr"
-        );
+      case 'application/vnd.jupyter.stderr': {
+        node.className = 'lm-Widget lm-Panel jp-OutputArea-child';
+        areaNode.className = 'lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child';
+        contentNode.className = 'lm-Widget p-Widget jp-RenderedText jp-OutputArea-output';
+        contentNode.setAttribute('data-mime-type', 'application/vnd.jupyter.stderr');
         break;
       }
       default: {
         const typeClassMap = new Map([
-          ["image/bmp", "jp-RenderedImage"],
-          ["image/png", "jp-RenderedImage"],
-          ["image/jpeg", "jp-RenderedImage"],
-          ["image/gif", "jp-RenderedImage"],
-          ["image/webp", "jp-RenderedImage"],
-          ["text/latex", "jp-RenderedLatex"],
-          ["image/svg+xml", "jp-RenderedSVG"],
-          ["text/markdown", "jp-RenderedHTMLCommon jp-RenderedHTML"],
+          ['image/bmp', 'jp-RenderedImage'],
+          ['image/png', 'jp-RenderedImage'],
+          ['image/jpeg', 'jp-RenderedImage'],
+          ['image/gif', 'jp-RenderedImage'],
+          ['image/webp', 'jp-RenderedImage'],
+          ['text/latex', 'jp-RenderedLatex'],
+          ['image/svg+xml', 'jp-RenderedSVG'],
+          ['text/markdown', 'jp-RenderedHTMLCommon jp-RenderedHTML']
         ]);
 
-        node.className =
-          "lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child jp-OutputArea-executeResult";
-        areaNode.className =
-          "lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child";
+        node.className = 'lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child jp-OutputArea-executeResult';
+        areaNode.className = 'lm-Widget p-Widget lm-Panel p-Panel jp-OutputArea-child';
         contentNode.className = `lm-Widget p-Widget ${
-          typeClassMap.get(type) || "jp-RenderedHTMLCommon"
+          typeClassMap.get(type) || 'jp-RenderedHTMLCommon'
         } jp-OutputArea-output`;
-        contentNode.setAttribute("data-mime-type", type);
+        contentNode.setAttribute('data-mime-type', type);
         break;
       }
     }
