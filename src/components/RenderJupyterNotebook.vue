@@ -3,17 +3,17 @@
 </template>
 
 <script>
-import { Notebook } from "../utils/index";
+import { Notebook } from '../utils/index';
 
 export default {
-  name: "RenderJupyterNotebook",
+  name: 'RenderJupyterNotebook',
   props: {
-    notebook: { required: true, type: Object },
+    notebook: { required: true, type: Object }
   },
   async mounted() {
     const notebook = new Notebook(this.notebook, false);
     const fragment = await notebook.render();
     this.$refs.NotebookFragment.appendChild(fragment);
-  },
+  }
 };
 </script>
