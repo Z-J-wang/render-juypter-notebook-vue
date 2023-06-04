@@ -160,7 +160,11 @@ export class Notebook {
     contentNode.className = 'lm-Widget p-Widget jp-Cell jp-CodeCell jp-Notebook-cell ';
     createCodemirror(source, contentNode); // input代码块渲染
     node = this._createContainerNode('inputCode', contentNode, executionCount);
-    await this._renderOutputCell(outputs, contentNode.parentNode.parentNode);
+    try {
+      await this._renderOutputCell(outputs, contentNode.parentNode.parentNode);
+    } catch (error) {
+      console.error(error);
+    }
 
     return node;
   }
@@ -201,14 +205,25 @@ export class Notebook {
           break;
         case 'display_data':
         case 'execute_result': {
-          // 富文本输出
+          /**
+           * display_data以及execute_result输出内容为富文本，富文本的输出结果必定包含以下两种文字:
+           *  - 展示文本。如text/html、image/png、text/plain、application/vnd.jupyter.widget-view+json等
+           *  - 报错替代文本。都为text/plain
+           * 本组件认为，outputs.data对象的**第一个属性为展示文本**。运行结果**正确**的情况下，**展示文本的数据类型为string以及array**。
+           * 如果数据类型不是两者之一，则认为运行结果异常，需要使用**报错替代文本**来展示展示。
+           */
           const { data: outputData, execution_count: executionCount } = output;
           const keys = Object.keys(outputData);
-          const key = keys[0];
+          let key = keys[0];
           let source = outputData[key];
           if (!source) return;
+          try {
+            source = typeof source === 'string' ? source : source.join('\n');
+          } catch (error) {
+            key = 'text/plain';
+            source = outputData[key];
+          }
           let node = document.createElement('div');
-          source = typeof source === 'string' ? source : source.join('\n');
           await this._renderCommonCell({
             type: key,
             options: { host: node, source: source }
