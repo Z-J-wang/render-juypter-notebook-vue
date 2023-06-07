@@ -1,6 +1,6 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "license": "MIT",
   "homepage": "https://github.com/Z-J-wang/render-juypter-notebook-vue#readme",
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
@@ -25,7 +25,10 @@
     "build": "vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name index --dest lib/RenderJupyterNotebook",
     "build:lib-notebook": "vue-cli-service build --target lib ./src/utils/notebook/index.js --name index --dest lib/Notebook",
-    "lint": "vue-cli-service lint",
+    "lint": "yarn lint:eslint && yarn lint:stylelint",
+    "lint:fix": "yarn lint:eslint --fix && yarn lint:stylelint --fix",
+    "lint:eslint": "eslint --config .eslintrc.js --ext .js,.vue,.html,.ts --ignore-path .eslintignore ./",
+    "lint:stylelint": "stylelint --config .stylelintrc.js --ignore-path .stylelintignore ./**/*.{html,vue,js,ts,css,sass,scss,less}",
     "test": "vitest run --config vitest.config.js",
     "test:watch": "vitest watch --config vitest.config.js"
   },
@@ -66,6 +69,9 @@
     "less-loader": "^8.0.0",
     "lint-staged": "^11.1.2",
     "prettier": "^2.4.1",
+    "stylelint": "^13.3.3",
+    "stylelint-config-standard": "^20.0.0",
+    "stylelint-order": "^6.0.3",
     "vitest": "^0.28.4",
     "vue": "^3.0.0"
   },
