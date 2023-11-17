@@ -16,11 +16,10 @@
  * 源码TS版：https://github.com/jupyterlab/jupyterlab/blob/master/packages/rendermime/src/latex.ts
  */
 
-const inline = "$"; // the inline math delimiter
+const inline = '$'; // the inline math delimiter
 // MATHSPLIT contains the pattern for math delimiters and special symbols
 // needed for searching for math in the text input.
-const MATHSPLIT =
-  /(\$\$?|\\(?:begin|end)\{[a-z]*\*?\}|\\[{}$]|[{}]|(?:\n\s*)+|@@\d+@@|\\\\(?:\(|\)|\[|\]))/i;
+const MATHSPLIT = /(\$\$?|\\(?:begin|end)\{[a-z]*\*?\}|\\[{}$]|[{}]|(?:\n\s*)+|@@\d+@@|\\\\(?:\(|\)|\[|\]))/i;
 /**
  *  Break up the text into its component parts and search
  *    through them for math delimiters, braces, linebreaks, etc.
@@ -40,39 +39,34 @@ export function removeMath(text) {
   // we still have to consider them at this point; the following issue has happened several times:
   //
   //     `$foo` and `$bar` are variables.  -->  <code>$foo ` and `$bar</code> are variables.
-  const hasCodeSpans = text.includes("`") || text.includes("~~~");
+  const hasCodeSpans = text.includes('`') || text.includes('~~~');
   if (hasCodeSpans) {
     text = text
-      .replace(/~/g, "~T")
+      .replace(/~/g, '~T')
       // note: the `fence` (three or more consecutive tildes or backticks)
       // can be followed by an `info string` but this cannot include backticks,
       // see specification: https://spec.commonmark.org/0.30/#info-string
-      .replace(
-        /^(?<fence>`{3,}|(~T){3,})[^`\n]*\n([\s\S]*?)^\k<fence>`*$/gm,
-        (wholematch) => wholematch.replace(/\$/g, "~D")
+      .replace(/^(?<fence>`{3,}|(~T){3,})[^`\n]*\n([\s\S]*?)^\k<fence>`*$/gm, wholematch =>
+        wholematch.replace(/\$/g, '~D')
       )
-      .replace(/(^|[^\\])(`+)([^\n]*?[^`\n])\2(?!`)/gm, (wholematch) =>
-        wholematch.replace(/\$/g, "~D")
-      );
-    deTilde = (text) => {
-      return text.replace(/~([TD])/g, (wholematch, character) =>
-        character === "T" ? "~" : inline
-      );
+      .replace(/(^|[^\\])(`+)([^\n]*?[^`\n])\2(?!`)/gm, wholematch => wholematch.replace(/\$/g, '~D'));
+    deTilde = text => {
+      return text.replace(/~([TD])/g, (wholematch, character) => (character === 'T' ? '~' : inline));
     };
   } else {
-    deTilde = (text) => {
+    deTilde = text => {
       return text;
     };
   }
-  let blocks = text.replace(/\r\n?/g, "\n").split(MATHSPLIT);
+  let blocks = text.replace(/\r\n?/g, '\n').split(MATHSPLIT);
   for (let i = 1, m = blocks.length; i < m; i += 2) {
     const block = blocks[i];
-    if (block.charAt(0) === "@") {
+    if (block.charAt(0) === '@') {
       //
       //  Things that look like our math markers will get
       //  stored and then retrieved along with the math.
       //
-      blocks[i] = "@@" + math.length + "@@";
+      blocks[i] = '@@' + math.length + '@@';
       math.push(block);
     } else if (start !== null) {
       //
@@ -98,9 +92,9 @@ export function removeMath(text) {
         end = null;
         last = null;
         braces = 0;
-      } else if (block === "{") {
+      } else if (block === '{') {
         braces++;
-      } else if (block === "}" && braces) {
+      } else if (block === '}' && braces) {
         braces--;
       }
     } else {
@@ -108,17 +102,17 @@ export function removeMath(text) {
       //  Look for math start delimiters and when
       //    found, set up the end delimiter.
       //
-      if (block === inline || block === "$$") {
+      if (block === inline || block === '$$') {
         start = i;
         end = block;
         braces = 0;
-      } else if (block === "\\\\(" || block === "\\\\[") {
+      } else if (block === '\\\\(' || block === '\\\\[') {
         start = i;
-        end = block.slice(-1) === "(" ? "\\\\)" : "\\\\]";
+        end = block.slice(-1) === '(' ? '\\\\)' : '\\\\]';
         braces = 0;
-      } else if (block.substr(1, 5) === "begin") {
+      } else if (block.substr(1, 5) === 'begin') {
         start = i;
-        end = "\\end" + block.substr(6);
+        end = '\\end' + block.substr(6);
         braces = 0;
       }
     }
@@ -129,7 +123,7 @@ export function removeMath(text) {
     end = null;
     last = null;
   }
-  return { text: deTilde(blocks.join("")), math };
+  return { text: deTilde(blocks.join('')), math };
 }
 /**
  * Put back the math strings that were saved,
@@ -143,16 +137,10 @@ export function replaceMath(text, math) {
    */
   const process = (match, n) => {
     let group = math[n];
-    if (
-      group.substr(0, 3) === "\\\\(" &&
-      group.substr(group.length - 3) === "\\\\)"
-    ) {
-      group = "\\(" + group.substring(3, group.length - 3) + "\\)";
-    } else if (
-      group.substr(0, 3) === "\\\\[" &&
-      group.substr(group.length - 3) === "\\\\]"
-    ) {
-      group = "\\[" + group.substring(3, group.length - 3) + "\\]";
+    if (group.substr(0, 3) === '\\\\(' && group.substr(group.length - 3) === '\\\\)') {
+      group = '\\(' + group.substring(3, group.length - 3) + '\\)';
+    } else if (group.substr(0, 3) === '\\\\[' && group.substr(group.length - 3) === '\\\\]') {
+      group = '\\[' + group.substring(3, group.length - 3) + '\\]';
     }
     return group;
   };
@@ -174,18 +162,18 @@ export function replaceMath(text, math) {
 function processMath(i, j, preProcess, math, blocks) {
   let block = blocks
     .slice(i, j + 1)
-    .join("")
-    .replace(/&/g, "&amp;") // use HTML entity for &
-    .replace(/</g, "&lt;") // use HTML entity for <
-    .replace(/>/g, "&gt;"); // use HTML entity for >
-  if (navigator && navigator.appName === "Microsoft Internet Explorer") {
-    block = block.replace(/(%[^\n]*)\n/g, "$1<br/>\n");
+    .join('')
+    .replace(/&/g, '&amp;') // use HTML entity for &
+    .replace(/</g, '&lt;') // use HTML entity for <
+    .replace(/>/g, '&gt;'); // use HTML entity for >
+  if (navigator && navigator.appName === 'Microsoft Internet Explorer') {
+    block = block.replace(/(%[^\n]*)\n/g, '$1<br/>\n');
   }
   while (j > i) {
-    blocks[j] = "";
+    blocks[j] = '';
     j--;
   }
-  blocks[i] = "@@" + math.length + "@@"; // replace the current block text with a unique tag to find later
+  blocks[i] = '@@' + math.length + '@@'; // replace the current block text with a unique tag to find later
   if (preProcess) {
     block = preProcess(block);
   }

@@ -15,9 +15,9 @@
  *
  */
 
-import { removeMath, replaceMath } from "./latex";
-import { URLExt } from "@jupyterlab/coreutils";
-import escape from "lodash.escape";
+import { removeMath, replaceMath } from './latex';
+import { URLExt } from '@jupyterlab/coreutils';
+import escape from 'lodash.escape';
 /**
  * Render HTML into a host node.
  *
@@ -27,12 +27,11 @@ import escape from "lodash.escape";
  */
 export function renderHTML(options) {
   // Unpack the options.
-  let { host, source, trusted, sanitizer, shouldTypeset, latexTypesetter } =
-    options;
+  let { host, source, trusted, sanitizer, shouldTypeset, latexTypesetter } = options;
   let originalSource = source;
   // Bail early if the source is empty.
   if (!source) {
-    host.textContent = "";
+    host.textContent = '';
     return Promise.resolve(undefined);
   }
   // Sanitize the source if it is not trusted. This removes all
@@ -43,7 +42,7 @@ export function renderHTML(options) {
   }
   // Set the inner HTML of the host.
   host.innerHTML = source;
-  if (host.getElementsByTagName("script").length > 0) {
+  if (host.getElementsByTagName('script').length > 0) {
     // If output it trusted, eval any script tags contained in the HTML.
     // This is not done automatically by the browser when script tags are
     // created by setting `innerHTML`.
@@ -72,28 +71,27 @@ export function renderHTML(options) {
  */
 export function renderImage(options) {
   // Unpack the options.
-  const { host, mimeType, source, width, height, needsBackground, unconfined } =
-    options;
+  const { host, mimeType, source, width, height, needsBackground, unconfined } = options;
   // Clear the content in the host.
-  host.textContent = "";
+  host.textContent = '';
   // Create the image element.
-  const img = document.createElement("img");
+  const img = document.createElement('img');
   // Set the source of the image.
   img.src = `data:${mimeType};base64,${source}`;
   // Set the size of the image if provided.
-  if (typeof height === "number") {
+  if (typeof height === 'number') {
     img.height = height;
   }
-  if (typeof width === "number") {
+  if (typeof width === 'number') {
     img.width = width;
   }
-  if (needsBackground === "light") {
-    img.classList.add("jp-needs-light-background");
-  } else if (needsBackground === "dark") {
-    img.classList.add("jp-needs-dark-background");
+  if (needsBackground === 'light') {
+    img.classList.add('jp-needs-light-background');
+  } else if (needsBackground === 'dark') {
+    img.classList.add('jp-needs-dark-background');
   }
   if (unconfined === true) {
-    img.classList.add("jp-mod-unconfined");
+    img.classList.add('jp-mod-unconfined');
   }
   // Add the image to the host.
   host.appendChild(img);
@@ -131,18 +129,18 @@ export async function renderMarkdown(options) {
   const { host, source, markdownParser, ...others } = options;
   // Clear the content if there is no source.
   if (!source) {
-    host.textContent = "";
+    host.textContent = '';
     return;
   }
-  let html = "";
+  let html = '';
 
   if (markdownParser) {
     // Separate math from normal markdown text.
     const parts = removeMath(source);
     // Convert the markdown to HTML.
-    html = await markdownParser.render(parts["text"]);
+    html = await markdownParser.render(parts['text']);
     // Replace math.
-    html = replaceMath(html, parts["math"]);
+    html = replaceMath(html, parts['math']);
   } else {
     // Fallback if the application does not have any markdown parser.
     html = `<pre>${source}</pre>`;
@@ -151,7 +149,7 @@ export async function renderMarkdown(options) {
   await renderHTML({
     host,
     source: html,
-    ...others,
+    ...others
   });
 }
 /**
@@ -166,9 +164,7 @@ export async function renderMarkdown(options) {
    */
   function createHeaderId(header) {
     var _a;
-    return (
-      (_a = header.textContent) !== null && _a !== void 0 ? _a : ""
-    ).replace(/ /g, "-");
+    return ((_a = header.textContent) !== null && _a !== void 0 ? _a : '').replace(/ /g, '-');
   }
   renderMarkdown.createHeaderId = createHeaderId;
 })(renderMarkdown || (renderMarkdown = {}));
@@ -184,26 +180,25 @@ export function renderSVG(options) {
   let { host, source, trusted, unconfined } = options;
   // Clear the content if there is no source.
   if (!source) {
-    host.textContent = "";
+    host.textContent = '';
     return Promise.resolve(undefined);
   }
   // Display a message if the source is not trusted.
   if (!trusted) {
-    host.textContent =
-      "Cannot display an untrusted SVG. Maybe you need to run the cell?";
+    host.textContent = 'Cannot display an untrusted SVG. Maybe you need to run the cell?';
     return Promise.resolve(undefined);
   }
   // Add missing SVG namespace (if actually missing)
-  const patt = "<svg[^>]+xmlns=[^>]+svg";
+  const patt = '<svg[^>]+xmlns=[^>]+svg';
   if (source.search(patt) < 0) {
-    source = source.replace("<svg", '<svg xmlns="http://www.w3.org/2000/svg"');
+    source = source.replace('<svg', '<svg xmlns="http://www.w3.org/2000/svg"');
   }
   // Render in img so that user can save it easily
   const img = new Image();
   img.src = `data:image/svg+xml,${encodeURIComponent(source)}`;
   host.appendChild(img);
   if (unconfined === true) {
-    host.classList.add("jp-mod-unconfined");
+    host.classList.add('jp-mod-unconfined');
   }
   return Promise.resolve();
 }
@@ -217,42 +212,38 @@ export function renderSVG(options) {
 function autolink(content) {
   // Taken from Visual Studio Code:
   // https://github.com/microsoft/vscode/blob/9f709d170b06e991502153f281ec3c012add2e42/src/vs/workbench/contrib/debug/browser/linkDetector.ts#L17-L18
-  const controlCodes = "\\u0000-\\u0020\\u007f-\\u009f";
+  const controlCodes = '\\u0000-\\u0020\\u007f-\\u009f';
   const webLinkRegex = new RegExp(
-    "(?:[a-zA-Z][a-zA-Z0-9+.-]{2,}:\\/\\/|data:|www\\.)[^\\s" +
+    '(?:[a-zA-Z][a-zA-Z0-9+.-]{2,}:\\/\\/|data:|www\\.)[^\\s' +
       controlCodes +
       '"]{2,}[^\\s' +
       controlCodes +
-      "\"'(){}\\[\\],:;.!?]",
-    "ug"
+      '"\'(){}\\[\\],:;.!?]',
+    'ug'
   );
   const nodes = [];
   let lastIndex = 0;
   let match;
   while (null != (match = webLinkRegex.exec(content))) {
     if (match.index !== lastIndex) {
-      nodes.push(
-        document.createTextNode(content.slice(lastIndex, match.index))
-      );
+      nodes.push(document.createTextNode(content.slice(lastIndex, match.index)));
     }
     let url = match[0];
     // Special case when the URL ends with ">" or "<"
     const lastChars = url.slice(-1);
-    const endsWithGtLt = [">", "<"].indexOf(lastChars) !== -1;
+    const endsWithGtLt = ['>', '<'].indexOf(lastChars) !== -1;
     const len = endsWithGtLt ? url.length - 1 : url.length;
-    const anchor = document.createElement("a");
+    const anchor = document.createElement('a');
     url = url.slice(0, len);
-    anchor.href = url.startsWith("www.") ? "https://" + url : url;
-    anchor.rel = "noopener";
-    anchor.target = "_blank";
+    anchor.href = url.startsWith('www.') ? 'https://' + url : url;
+    anchor.rel = 'noopener';
+    anchor.target = '_blank';
     anchor.appendChild(document.createTextNode(url.slice(0, len)));
     nodes.push(anchor);
     lastIndex = match.index + len;
   }
   if (lastIndex !== content.length) {
-    nodes.push(
-      document.createTextNode(content.slice(lastIndex, content.length))
-    );
+    nodes.push(document.createTextNode(content.slice(lastIndex, content.length)));
   }
   return nodes;
 }
@@ -265,16 +256,12 @@ function autolink(content) {
 function splitShallowNode(node, at) {
   var _a, _b;
   const pre = node.cloneNode();
-  pre.textContent =
-    (_a = node.textContent) === null || _a === void 0
-      ? void 0
-      : _a.substr(0, at);
+  pre.textContent = (_a = node.textContent) === null || _a === void 0 ? void 0 : _a.substr(0, at);
   const post = node.cloneNode();
-  post.textContent =
-    (_b = node.textContent) === null || _b === void 0 ? void 0 : _b.substr(at);
+  post.textContent = (_b = node.textContent) === null || _b === void 0 ? void 0 : _b.substr(at);
   return {
     pre: pre,
-    post: post,
+    post: post
   };
 }
 /**
@@ -290,10 +277,10 @@ export function renderText(options) {
   const { host, sanitizer, source } = options;
   // Create the HTML content.
   const content = sanitizer.sanitize(Private.ansiSpan(source), {
-    allowedTags: ["span"],
+    allowedTags: ['span']
   });
   // Set the sanitized content for the host node.
-  const pre = document.createElement("pre");
+  const pre = document.createElement('pre');
   pre.innerHTML = content;
   const preTextContent = pre.textContent;
   if (preTextContent) {
@@ -309,36 +296,24 @@ export function renderText(options) {
       let linkNode = linkedNodes.shift();
       // This should never happen because we modify the arrays in flight so they should end simultaneously,
       // but this makes the coding assistance happy and might make it easier to conceptualize.
-      if (typeof preNode === "undefined") {
+      if (typeof preNode === 'undefined') {
         combinedNodes.push(linkNode);
         break;
       }
-      if (typeof linkNode === "undefined") {
+      if (typeof linkNode === 'undefined') {
         combinedNodes.push(preNode);
         break;
       }
-      let preLen =
-        (_a = preNode.textContent) === null || _a === void 0
-          ? void 0
-          : _a.length;
-      let linkLen =
-        (_b = linkNode.textContent) === null || _b === void 0
-          ? void 0
-          : _b.length;
+      let preLen = (_a = preNode.textContent) === null || _a === void 0 ? void 0 : _a.length;
+      let linkLen = (_b = linkNode.textContent) === null || _b === void 0 ? void 0 : _b.length;
       if (preLen && linkLen) {
         if (preLen > linkLen) {
           // Split pre node and only keep the shorter part
-          let { pre: keep, post: postpone } = splitShallowNode(
-            preNode,
-            linkLen
-          );
+          let { pre: keep, post: postpone } = splitShallowNode(preNode, linkLen);
           preNodes.unshift(postpone);
           preNode = keep;
         } else if (linkLen > preLen) {
-          let { pre: keep, post: postpone } = splitShallowNode(
-            linkNode,
-            preLen
-          );
+          let { pre: keep, post: postpone } = splitShallowNode(linkNode, preLen);
           linkedNodes.unshift(postpone);
           linkNode = keep;
         }
@@ -360,7 +335,7 @@ export function renderText(options) {
           // otherwise start a new anchor; the contents of the `linkNode` and `preNode` should be the same,
           // so we just put the neatly formatted `preNode` inside the anchor node (`linkNode`)
           // and append that to combined nodes.
-          linkNode.textContent = "";
+          linkNode.textContent = '';
           linkNode.appendChild(preNode);
           combinedNodes.push(linkNode);
           inAnchorElement = true;
@@ -368,7 +343,7 @@ export function renderText(options) {
       }
     }
     // TODO: replace with `.replaceChildren()` once the target ES version allows it
-    pre.innerHTML = "";
+    pre.innerHTML = '';
     for (const child of combinedNodes) {
       pre.appendChild(child);
     }
@@ -392,7 +367,7 @@ var Private;
    */
   function evalInnerHTMLScriptTags(host) {
     // Create a snapshot of the current script nodes.
-    const scripts = Array.from(host.getElementsByTagName("script"));
+    const scripts = Array.from(host.getElementsByTagName('script'));
     // Loop over each script node.
     for (const script of scripts) {
       // Skip any scripts which no longer have a parent.
@@ -400,7 +375,7 @@ var Private;
         continue;
       }
       // Create a new script node which will be clone.
-      const clone = document.createElement("script");
+      const clone = document.createElement('script');
       // Copy the attributes into the clone.
       const attrs = script.attributes;
       for (let i = 0, n = attrs.length; i < n; ++i) {
@@ -419,7 +394,7 @@ var Private;
    */
   function handleDefaults(node) {
     // Handle anchor elements.
-    const anchors = node.getElementsByTagName("a");
+    const anchors = node.getElementsByTagName('a');
     for (let i = 0; i < anchors.length; i++) {
       const el = anchors[i];
       // skip when processing a elements inside svg
@@ -431,40 +406,40 @@ var Private;
       const isLocal = URLExt.isLocal(path);
       // set target attribute if not already present
       if (!el.target) {
-        el.target = isLocal ? "_self" : "_blank";
+        el.target = isLocal ? '_self' : '_blank';
       }
       // set rel as 'noopener' for non-local anchors
       if (!isLocal) {
-        el.rel = "noopener";
+        el.rel = 'noopener';
       }
     }
     // Handle image elements.
-    const imgs = node.getElementsByTagName("img");
+    const imgs = node.getElementsByTagName('img');
     for (let i = 0; i < imgs.length; i++) {
       if (!imgs[i].alt) {
-        imgs[i].alt = "Image";
+        imgs[i].alt = 'Image';
       }
     }
   }
   Private.handleDefaults = handleDefaults;
 
   const ANSI_COLORS = [
-    "ansi-black",
-    "ansi-red",
-    "ansi-green",
-    "ansi-yellow",
-    "ansi-blue",
-    "ansi-magenta",
-    "ansi-cyan",
-    "ansi-white",
-    "ansi-black-intense",
-    "ansi-red-intense",
-    "ansi-green-intense",
-    "ansi-yellow-intense",
-    "ansi-blue-intense",
-    "ansi-magenta-intense",
-    "ansi-cyan-intense",
-    "ansi-white-intense",
+    'ansi-black',
+    'ansi-red',
+    'ansi-green',
+    'ansi-yellow',
+    'ansi-blue',
+    'ansi-magenta',
+    'ansi-cyan',
+    'ansi-white',
+    'ansi-black-intense',
+    'ansi-red-intense',
+    'ansi-green-intense',
+    'ansi-yellow-intense',
+    'ansi-blue-intense',
+    'ansi-magenta-intense',
+    'ansi-cyan-intense',
+    'ansi-white-intense'
   ];
   /**
    * Create HTML tags for a string with given foreground, background etc. and
@@ -474,43 +449,43 @@ var Private;
     if (chunk) {
       const classes = [];
       const styles = [];
-      if (bold && typeof fg === "number" && 0 <= fg && fg < 8) {
+      if (bold && typeof fg === 'number' && 0 <= fg && fg < 8) {
         fg += 8; // Bold text uses "intense" colors
       }
       if (inverse) {
         [fg, bg] = [bg, fg];
       }
-      if (typeof fg === "number") {
-        classes.push(ANSI_COLORS[fg] + "-fg");
+      if (typeof fg === 'number') {
+        classes.push(ANSI_COLORS[fg] + '-fg');
       } else if (fg.length) {
         styles.push(`color: rgb(${fg})`);
       } else if (inverse) {
-        classes.push("ansi-default-inverse-fg");
+        classes.push('ansi-default-inverse-fg');
       }
-      if (typeof bg === "number") {
-        classes.push(ANSI_COLORS[bg] + "-bg");
+      if (typeof bg === 'number') {
+        classes.push(ANSI_COLORS[bg] + '-bg');
       } else if (bg.length) {
         styles.push(`background-color: rgb(${bg})`);
       } else if (inverse) {
-        classes.push("ansi-default-inverse-bg");
+        classes.push('ansi-default-inverse-bg');
       }
       if (bold) {
-        classes.push("ansi-bold");
+        classes.push('ansi-bold');
       }
       if (underline) {
-        classes.push("ansi-underline");
+        classes.push('ansi-underline');
       }
       if (classes.length || styles.length) {
-        out.push("<span");
+        out.push('<span');
         if (classes.length) {
-          out.push(` class="${classes.join(" ")}"`);
+          out.push(` class="${classes.join(' ')}"`);
         }
         if (styles.length) {
-          out.push(` style="${styles.join("; ")}"`);
+          out.push(` style="${styles.join('; ')}"`);
         }
-        out.push(">");
+        out.push('>');
         out.push(chunk);
-        out.push("</span>");
+        out.push('</span>');
       } else {
         out.push(chunk);
       }
@@ -529,14 +504,14 @@ var Private;
       r = numbers.shift();
       g = numbers.shift();
       b = numbers.shift();
-      if ([r, g, b].some((c) => c < 0 || 255 < c)) {
-        throw new RangeError("Invalid range for RGB colors");
+      if ([r, g, b].some(c => c < 0 || 255 < c)) {
+        throw new RangeError('Invalid range for RGB colors');
       }
     } else if (n === 5 && numbers.length >= 1) {
       // 256 colors
       const idx = numbers.shift();
       if (idx < 0) {
-        throw new RangeError("Color index must be >= 0");
+        throw new RangeError('Color index must be >= 0');
       } else if (idx < 16) {
         // 16 default terminal colors
         return idx;
@@ -552,10 +527,10 @@ var Private;
         // grayscale, see https://stackoverflow.com/a/27165165/500098
         r = g = b = (idx - 232) * 10 + 8;
       } else {
-        throw new RangeError("Color index must be < 256");
+        throw new RangeError('Color index must be < 256');
       }
     } else {
-      throw new RangeError("Invalid extended color specification");
+      throw new RangeError('Invalid extended color specification');
     }
     return [r, g, b];
   }
@@ -578,14 +553,14 @@ var Private;
     const numbers = [];
     let start = 0;
     str = escape(str);
-    str += "\x1b[m"; // Ensure markup for trailing text
+    str += '\x1b[m'; // Ensure markup for trailing text
     // tslint:disable-next-line
     while ((match = ansiRe.exec(str))) {
-      if (match[2] === "m") {
-        const items = match[1].split(";");
+      if (match[2] === 'm') {
+        const items = match[1].split(';');
         for (let i = 0; i < items.length; i++) {
           const item = items[i];
-          if (item === "") {
+          if (item === '') {
             numbers.push(0);
           } else if (item.search(/^\d+$/) !== -1) {
             numbers.push(parseInt(item, 10));
@@ -695,7 +670,7 @@ var Private;
         }
       }
     }
-    return out.join("");
+    return out.join('');
   }
   Private.ansiSpan = ansiSpan;
 })(Private || (Private = {}));
