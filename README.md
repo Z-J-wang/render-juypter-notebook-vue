@@ -112,7 +112,7 @@ import { Notebook } from "render-jupyter-notebook-vue/src/utils/index";
 
 当`defaultMarkdownParser`无法满足您的markdown渲染需求时，您就需要自己实现markdown渲染工具，然后通过`markdownParser`参数传递给`Class Notebook`，`Class Notebook`将会优先使用您传递过来的markdown渲染工具。
 
-> <font color=red>需要注意的是</font>，您提供的markdown渲染工具必须提供一个`function render()`。`Class Notebook`渲染时，只会会调用`render()`来渲染markdown。
+> <font color=red>需要注意的是</font>，您提供的markdown渲染工具必须提供一个`function render()`。`Class Notebook`渲染时，只会调用`render()`来渲染markdown。
 
 > 绝大多数情况下，您是不需要传递markdownParser参数的。
 
