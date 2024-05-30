@@ -6,8 +6,6 @@ RenderJupyterNotebook是一个 vue 3.x 组件，实现了：**通过JavaScript�
 
 > RenderJupyterNotebook组件已经发布到npm。链接：[render-jupyter-notebook-vue - npm (npmjs.com)](https://www.npmjs.com/package/render-jupyter-notebook-vue)
 
-> RenderJupyterNotebook组件是基于vue3.x编写的，所以打包后的文件（即，lib/中的文件）只适合vue3.x项目。如果vue2.x要使用RenderJupyterNotebook组件，请看**在vue2.x中的使用说明**。
-
 ## 安装render-jupyter-notebook-vue插件
 
 ```bash
@@ -68,36 +66,18 @@ const fragment = await notebook.render();
 this.$refs.NotebookFragment.appendChild(fragment);
 ```
 
-# 在vue2.x中的使用说明
-
-RenderJupyterNotebook组件是基于vue3.x编写的，所以打包后的文件（即，lib/中的文件）只适合vue3.x项目。如果vue2.x要使用RenderJupyterNotebook组件，需要直接引用未编译的代码。
-
-如下：
-
-```js
-import RenderJupyterNotebook from "render-jupyter-notebook-vue"; // vue 3.x 写法
-
-import RenderJupyterNotebook from "render-jupyter-notebook-vue/src/components/RenderJupyterNotebook.vue"; // vue 2.x 写法
-```
-
-Class Notebook 为纯Javascript，但同样可以调用未编译的代码来使用：
-
-```js
-import { Notebook } from "render-jupyter-notebook-vue/src/utils/index";
-```
-
 # Class Notebook说明
 
 `Class Notebook`是RenderJupyterNotebook组件的核心部分。它实现了**将notebook渲染成HTML**的全部过程。
 
 `Class Notebook`构造函数接收四个参数：
 
-| 参数            | 类型          | 默认值                  | 说明                                                 |
-| --------------- | ------------- | ----------------------- | ---------------------------------------------------- |
-| `source`        | `JSON Object` | -                       | notebook源码的JSON数据                               |
-| `trusted`       | `Boolean`     | `false`                 | 用于说明当前运行环境是否安全可信，涉及Script,SVG渲染 |
-| `shouldTypeset` | `Boolean`     | `true`                  | 是否对数学公式字符进行latex排版                      |
-| markdownParser  |               | `defaultMarkdownParser` | markdown 渲染工具                                    |
+| 参数             | 类型          | 默认值                  | 说明                                                 |
+| ---------------- | ------------- | ----------------------- | ---------------------------------------------------- |
+| `source`         | `JSON Object` | -                       | notebook源码的JSON数据                               |
+| `trusted`        | `Boolean`     | `false`                 | 用于说明当前运行环境是否安全可信，涉及Script,SVG渲染 |
+| `shouldTypeset`  | `Boolean`     | `true`                  | 是否对数学公式字符进行latex排版                      |
+| `markdownParser` |               | `defaultMarkdownParser` | markdown 渲染工具                                    |
 
 ## 关于trusted参数
 
