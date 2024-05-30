@@ -1,44 +1,56 @@
-## 2.0.4（2024-05-30）
+## 2.0.4
 
-### 调整
+_2024-05-30_
 
-- 修正 readme.md 描述
+### Changes
 
-## 2.0.3（2024-04-19）
+- 优化 readme.md 描述
 
-### 调整
+## 2.0.3
 
-- 修正 readme.md 描述
+_2024-04-19_
 
-### 修复
+### Changes
 
-- [渲染RenderJupyterNotebook组件前必须要保证notebook数据已经获取到位，否则会报错。 · Issue #44 · Z-J-wang/render-juypter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/44)
+- 优化 readme.md 描述
 
-## 2.0.2（2023-11-17）
+### Bug fixes
 
-### 调整
+- [渲染 RenderJupyterNotebook 组件前必须要保证 notebook 数据已经获取到位，否则会报错。 · Issue #44 · Z-J-wang/render-juypter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/44)
+
+## 2.0.2
+
+_2023-11-17_
+
+### Changes
 
 - 关闭打包时 sourceMap 的生成
 
-## 2.0.1（2023-06-07）
+## 2.0.1
 
-### 修复
+_2023-06-07_
+
+### Bug fixes
 
 - 修复 notebook 中的**code 模块没有正常输出结果**导致渲染异常问题，同时增加渲染友好输出处理
 
-## 2.0.0（2023-04-25）
+## 2.0.0
 
-### 调整
+_2023-04-25_
+
+### Changes
 
 - 调整 vue 的版本，改为 vue-demi
 
-### 修复
+### Bug fixes
 
 - 修复@/路径，在主项目中不能识别问题
 
-## 1.0.0（2023-02-04）
+## 1.0.0
 
-### 新增
+_2023-02-04_
+
+### Features
 
 - 项目创建
 - npm 发布
