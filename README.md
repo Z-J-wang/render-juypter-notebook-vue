@@ -72,15 +72,17 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 `Class Notebook`构造函数接收四个参数：
 
-| 参数                      | 类型                              | 默认值                           | 说明                                                 |
-| ------------------------- | --------------------------------- | -------------------------------- | ---------------------------------------------------- |
-| `source`                  | `JSON Object`                     | -                                | notebook源码的JSON数据                               |
-| `trusted`                 | `Boolean`                         | `false`                          | 用于说明当前运行环境是否安全可信，涉及Script,SVG渲染 |
-| `shouldTypeset`           | `Boolean`                         | `true`                           | 是否对数学公式字符进行latex排版                      |
-| `markdownParser`          |                                   | `defaultMarkdownParser`          | markdown 渲染工具                                    |
-| `mathJaxTypesetterConfig` | `{ url: String, config?: String}` | `defaultMathJaxTypesetterConfig` | `MathJaxTypesetter`配置项                            |
+| 参数                      | 类型                             | 默认值                           | 说明                                                 |
+| ------------------------- | -------------------------------- | -------------------------------- | ---------------------------------------------------- |
+| `source`                  | `JSON Object`                    | -                                | notebook源码的JSON数据                               |
+| `trusted`                 | `Boolean`                        | `false`                          | 用于说明当前运行环境是否安全可信，涉及Script,SVG渲染 |
+| `shouldTypeset`           | `Boolean`                        | `true`                           | 是否对数学公式字符进行latex排版                      |
+| `markdownParser`          |                                  | `defaultMarkdownParser`          | markdown 渲染工具                                    |
+| `mathJaxTypesetterConfig` | `{ url: String, config: String}` | `defaultMathJaxTypesetterConfig` | `MathJaxTypesetter`配置项                            |
 
-> `defaultMarkdownParser`: markdown-it实例。具体如下：
+> ### 关于`defaultMarkdownParser`
+>
+>  markdown-it实例。具体如下：
 >
 > ```js
 > import markdown from 'markdown-it';
@@ -88,7 +90,14 @@ this.$refs.NotebookFragment.appendChild(fragment);
 > export default markdown({ html: true, xhtmlOut: true, breaks: true, linkify: true });
 > ```
 >
-> 
+> ### 关于`defaultMathJaxTypesetterConfig`
+>
+> ```js
+> const defaultMathJaxTypesetterConfig = {
+>   url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js',
+>   config: 'TeX-AMS_HTML-full,Safe'
+> };
+> ```
 
 ## 关于trusted参数
 
