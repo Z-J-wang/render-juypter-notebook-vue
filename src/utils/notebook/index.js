@@ -4,7 +4,7 @@ import { createCodemirror } from './codemirror';
 import { defaultSanitizer } from './sanitizer';
 import { MathJaxTypesetter } from '@jupyterlab/mathjax2';
 import { renderHTML, renderImage, renderLatex, renderMarkdown, renderSVG, renderText } from './renderers';
-import defaultMarkdownParser from './markdown.js'; // 引入cngbdb-ui的markdown渲染逻辑
+import defaultMarkdownParser from './markdown.it'; // 引入markdown.it
 
 export class Notebook {
   _source; // notebook源数据
@@ -22,8 +22,9 @@ export class Notebook {
    * @param {Boolean} trusted 当前渲染字符是安全或者当前运行环境是否可信，涉及Script,SVG渲染,默认为False
    * @param {Boolean} shouldTypeset 是否对数学公式字符进行latex排版,默认为true
    * @param {*} markdownParser markdown 渲染工具
+   * @param {*} mathJaxTypesetterConfig mathjax 插件配置
    */
-  constructor(source, trusted, shouldTypeset, markdownParser) {
+  constructor(source, trusted, shouldTypeset, markdownParser, mathJaxTypesetterConfig) {
     if (!source.cells || !(source.cells instanceof Array))
       throw 'The Notebook is Error! Cells attribute is required and is Array!';
     this._source = JSON.parse(JSON.stringify(source));
@@ -35,10 +36,11 @@ export class Notebook {
     this._trusted = trusted || false; // 当前运行环境是否安全可信，涉及Script,SVG渲染
     this._sanitizer = defaultSanitizer; // 字符串无害化处理
     this._shouldTypeset = shouldTypeset || true; // 是否对数学公式字符进行latex排版,这里默认为true
-    this._latexTypesetter = new MathJaxTypesetter({
+    const defaultMathJaxTypesetterConfig = {
       url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js',
       config: 'TeX-AMS_HTML-full,Safe'
-    }); // latex 插件实例化
+    };
+    this._latexTypesetter = new MathJaxTypesetter(mathJaxTypesetterConfig || defaultMathJaxTypesetterConfig); // latex 插件实例化
     this._markdownParser = markdownParser || defaultMarkdownParser; // markdown 渲染工具
     /*---------- 默认配置项 END ----------*/
   }
