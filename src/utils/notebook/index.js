@@ -19,10 +19,10 @@ export class Notebook {
   /**
    * 构造函数
    * @param {Object} sourceOfJson Notebook 源数据，JSON 对象
-   * @param {Boolean} trusted 当前渲染字符是安全或者当前运行环境是否可信，涉及Script,SVG渲染,默认为False
+   * @param {Boolean} trusted 当前渲染字符是安全或者当前运行环境是否可信，涉及Script,SVG渲染,默认为false
    * @param {Boolean} shouldTypeset 是否对数学公式字符进行latex排版,默认为true
-   * @param {*} markdownParser markdown 渲染工具
-   * @param {*} mathJaxTypesetterConfig mathjax 插件配置
+   * @param {*} markdownParser markdown 渲染工具, 默认值为 defaultMarkdownParser
+   * @param {*} mathJaxTypesetterConfig mathjax 插件配置，默认值为 defaultMathJaxTypesetterConfig
    */
   constructor(source, trusted, shouldTypeset, markdownParser, mathJaxTypesetterConfig) {
     if (!source.cells || !(source.cells instanceof Array))

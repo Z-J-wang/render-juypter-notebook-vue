@@ -18,10 +18,7 @@ export default {
   methods: {
     async render() {
       this.$refs.NotebookFragment.innerHTML = ''; // Clear the previous content
-      const notebook = new Notebook(this.notebook, false, true, null, {
-        url: 'https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js',
-        config: 'TeX-AMS_HTML-full,Safe'
-      });
+      const notebook = new Notebook(this.notebook, false);
       const fragment = await notebook.render();
       this.$refs.NotebookFragment.appendChild(fragment);
     }
