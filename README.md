@@ -139,6 +139,11 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 - Z-J-wang <https://github.com/Z-J-wang>
 
+## Contact
+
+- 邮箱：<a href="mailto:Jay040030@outlook.com">Jay040030@outlook.com</a>
+- QQ: 1356573671
+
 ## LICENSE
 
 [MIT](https://opensource.org/licenses/MIT)
