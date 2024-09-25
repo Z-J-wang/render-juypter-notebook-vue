@@ -1,7 +1,7 @@
 <template>
   <div class="home">
     <el-container>
-      <el-header class="bg-white shadow">
+      <el-header class="bg-white shadow sticky top-0 z-10">
         <div class="bg-white flex flex-nowrap justify-between items-center" style="height: 60px">
           <h2 class="text-3xl font-bold">render-jupyter-notebook-vue</h2>
           <el-upload
