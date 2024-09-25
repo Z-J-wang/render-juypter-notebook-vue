@@ -2,7 +2,7 @@
 
 ## 介绍
 
-RenderJupyterNotebook 是一个 vue 3.x 组件，实现了：**通过 JavaScript 还原渲染 jupyter notebook**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于 JupyterLab 并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
+RenderJupyterNotebook 是一个 vue 3.x 组件，**通过 JavaScript 实现 jupyter notebook 文件的还原渲染**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于 JupyterLab 并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
 
 ## 使用
 
