@@ -1,10 +1,22 @@
+## 2.2.0
+
+_2024-09-26_
+
+### Features
+
+- [#63](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/64) 新增首页，并发布与 Github Pages
+
+### Changes
+
+- [#63](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/63) 引入 highlight.js，优化 notebook 中的 markdown 代码的渲染
+
 ## 2.1.0
 
 _2024-08-31_
 
 ### Changes
 
-- [#55](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/55)`class notebook` 增加形参`mathJaxTypesetterConfig`，用于自定义`MathJaxTypesetter`的实例化配置
+- [#55](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/55) `class notebook` 增加形参`mathJaxTypesetterConfig`，用于自定义`MathJaxTypesetter`的实例化配置
 
 ## 2.0.4
 
