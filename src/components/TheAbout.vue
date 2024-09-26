@@ -15,7 +15,7 @@ export default {
     };
   },
   mounted() {
-    fetchMarkdownData('/Introduction.md').then(res => {
+    fetchMarkdownData('/render-juypter-notebook-vue/Introduction.md').then(res => {
       this.markdownHtml = Markdown.render(res);
     });
   }

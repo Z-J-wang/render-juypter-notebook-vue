@@ -1,7 +1,7 @@
 const { defineConfig } = require('@vue/cli-service');
 
 module.exports = defineConfig({
-  publicPath: './',
+  publicPath: '/render-juypter-notebook-vue/',
   productionSourceMap: false,
   transpileDependencies: true,
   css: {
