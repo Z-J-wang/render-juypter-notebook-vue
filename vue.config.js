@@ -17,7 +17,7 @@ module.exports = defineConfig({
           chunks: 'all', // 选择哪些 chunk 进行优化, 有效值 all，async 和 initial
           maxAsyncRequests: 30, // 按需加载时的最大并行请求数
           maxInitialRequests: 30, // 入口点的最大并行请求数
-          minSize: 30000, // 生成 chunk 的最小体积（以 bytes 为单位）
+          minSize: 300000, // 生成 chunk 的最小体积（以 bytes 为单位）
           maxSize: 1024000, // 生成 chunk 的最大体积（以 bytes 为单位），对大于该值的js尝试做拆分
           cacheGroups: {
             vendors: {
