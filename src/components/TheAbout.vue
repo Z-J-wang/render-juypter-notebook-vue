@@ -1,9 +1,23 @@
 <template>
   <div class="about">
-    <h1>About</h1>
-    <p>
-      This is a simple Vue.js application that demonstrates the use of the Vue Router for navigation between different
-      pages.
-    </p>
+    <article class="markdown-body" v-html="markdownHtml" />
   </div>
 </template>
+
+<script>
+import { fetchMarkdownData } from '../utils/index';
+import Markdown from '../utils/notebook/markdown.it';
+
+export default {
+  data() {
+    return {
+      markdownHtml: ''
+    };
+  },
+  mounted() {
+    fetchMarkdownData('/Introduction.md').then(res => {
+      this.markdownHtml = Markdown.render(res);
+    });
+  }
+};
+</script>

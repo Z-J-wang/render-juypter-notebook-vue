@@ -1,6 +1,8 @@
 /* stylelint-disable property-no-unknown */
 /* stylelint-disable selector-pseudo-element-no-unknown */
 /* stylelint-disable selector-type-no-unknown */
+@import url('./github-markdown.css');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;

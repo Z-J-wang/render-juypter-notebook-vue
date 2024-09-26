@@ -11,9 +11,9 @@
               rel="noopener noreferrer nofollow"
             >
               <el-image class="logo" :src="require('../assets/img/logo.png')" />
-              <h2 class="text-xl font-bold">Render jupyter notebook vue</h2>
+              <h2 class="text-xl font-bold">RenderJupyterNotebook</h2>
             </a>
-            <el-tooltip class="box-item" effect="light" content="View Introduction" placement="top">
+            <el-tooltip class="box-item" effect="light" content="View introduction" placement="top">
               <el-button plain link @click.stop="drawer = true">
                 <el-icon><Document /></el-icon>
               </el-button>
@@ -42,7 +42,7 @@
         </el-text>
       </el-footer>
 
-      <el-drawer v-model="drawer" title="Introduction" direction="rtl" size="50%">
+      <el-drawer v-model="drawer" direction="rtl" size="50%">
         <TheAbout />
       </el-drawer>
     </el-container>
