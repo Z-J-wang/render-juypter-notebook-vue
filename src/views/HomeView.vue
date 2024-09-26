@@ -2,7 +2,7 @@
   <DefaultLayout>
     <template #header-right>
       <TheUploader v-model:notebook="notebook" />
-      <a href="/OutputExamples.ipynb" target="_blank">
+      <a href="/render-juypter-notebook-vue/OutputExamples.ipynb" target="_blank">
         <el-button plain class="example-button">
           <el-icon size="20" class="mr-1"><Download /></el-icon> Example
         </el-button>
