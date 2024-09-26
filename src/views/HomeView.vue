@@ -14,18 +14,23 @@
 
 <script>
 import RenderJupyterNotebook from '../components/RenderJupyterNotebook';
-import example from '../assets/OutputExamples';
 import TheUploader from '../components/TheUploader.vue';
 import DefaultLayout from '..//layout/DefaultLayout.vue';
 import { Download } from '@element-plus/icons-vue';
+import { fetchNotebookData } from '../utils/index';
 
 export default {
   name: 'HomeView',
   components: { RenderJupyterNotebook, TheUploader, DefaultLayout, Download },
   data() {
     return {
-      notebook: example
+      notebook: {}
     };
+  },
+  created() {
+    fetchNotebookData('/render-juypter-notebook-vue/OutputExamples.ipynb').then(data => {
+      this.notebook = data;
+    });
   }
 };
 </script>
