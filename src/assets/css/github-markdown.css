@@ -1,0 +1,21 @@
+@import url('github-markdown-css/github-markdown-light.css');
+
+.markdown-body {
+  margin: 0 auto;
+  padding: 0 16px 16px;
+  min-width: 200px;
+  max-width: 980px;
+  box-sizing: border-box;
+}
+
+.markdown-body ol,
+.markdown-body ul,
+.markdown-body menu {
+  list-style: auto;
+}
+
+@media (max-width: 767px) {
+  .markdown-body {
+    padding: 15px;
+  }
+}

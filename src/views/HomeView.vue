@@ -1,16 +1,27 @@
 <template>
-  <div class="home">
+  <DefaultLayout>
+    <template #header-right>
+      <TheUploader v-model:notebook="notebook" />
+      <a href="/OutputExamples.ipynb" target="_blank">
+        <el-button plain class="example-button">
+          <el-icon size="20" class="mr-1"><Download /></el-icon> Example
+        </el-button>
+      </a>
+    </template>
     <RenderJupyterNotebook :notebook="notebook" />
-  </div>
+  </DefaultLayout>
 </template>
 
 <script>
 import RenderJupyterNotebook from '../components/RenderJupyterNotebook';
 import example from '../assets/OutputExamples';
+import TheUploader from '../components/TheUploader.vue';
+import DefaultLayout from '..//layout/DefaultLayout.vue';
+import { Download } from '@element-plus/icons-vue';
 
 export default {
   name: 'HomeView',
-  components: { RenderJupyterNotebook },
+  components: { RenderJupyterNotebook, TheUploader, DefaultLayout, Download },
   data() {
     return {
       notebook: example
@@ -20,9 +31,11 @@ export default {
 </script>
 
 <style lang="less" scoped>
-.home {
-  margin: 0 auto;
-  width: 1200px;
-  background-color: white;
+.example-button {
+  &.el-button.is-plain:hover {
+    border-color: #f37726;
+    color: #f37726;
+    outline: none;
+  }
 }
 </style>

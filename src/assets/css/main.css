@@ -1,0 +1,54 @@
+/* stylelint-disable property-no-unknown */
+/* stylelint-disable selector-pseudo-element-no-unknown */
+/* stylelint-disable selector-type-no-unknown */
+@import url('./github-markdown.css');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.el-drawer__close-btn:focus i,
+.el-drawer__close-btn:hover i {
+  color: #f37726 !important;
+}
+
+/* view-transition animation */
+.notebook-fragment {
+  view-transition-name: figure-caption;
+}
+
+@keyframes grow-x {
+  from {
+    transform: scaleX(0);
+  }
+
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes shrink-x {
+  from {
+    transform: scaleX(1);
+  }
+
+  to {
+    transform: scaleX(0);
+  }
+}
+
+::view-transition-old(figure-caption),
+::view-transition-new(figure-caption) {
+  right: auto;
+  left: 0;
+  height: auto;
+  transform-origin: left center;
+}
+
+::view-transition-old(figure-caption) {
+  animation: 0.5s linear both shrink-x;
+}
+
+::view-transition-new(figure-caption) {
+  animation: 0.5s 0.5s linear both grow-x;
+}

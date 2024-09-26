@@ -1,5 +1,3 @@
-# render-jupyter-notebook-vue
-
 ## 介绍
 
 RenderJupyterNotebook 是一个 vue 3.x 组件，**通过 JavaScript 实现 jupyter notebook 文件的还原渲染**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于 JupyterLab 并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
@@ -134,16 +132,3 @@ this.$refs.NotebookFragment.appendChild(fragment);
 ### Class Notebook 更多说明
 
 更多有关于`Class Notebook`说明，请查看：[根据 Jupyter-lab 源码实现 notebook（.ipynb）在页面中的渲染\_jupyter 源码](https://blog.csdn.net/weixin_44869002/article/details/129008963)
-
-## Author
-
-- Z-J-wang <https://github.com/Z-J-wang>
-
-## Contact
-
-- 邮箱：<a href="mailto:Jay040030@outlook.com">Jay040030@outlook.com</a>
-- QQ: 1356573671
-
-## LICENSE
-
-[MIT](https://opensource.org/licenses/MIT)
