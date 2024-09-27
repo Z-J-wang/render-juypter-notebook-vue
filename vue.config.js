@@ -7,9 +7,7 @@ module.exports = defineConfig({
   transpileDependencies: true,
 
   configureWebpack: config => {
-    if (process.env.NODE_ENV === 'production') {
-      // 为生产环境修改配置...
-      config.mode = 'production';
+    if (process.env.NODE_ENV === 'prod') {
       // 将每个依赖包打包成单独的js文件
       const optimization = {
         runtimeChunk: 'single',
@@ -54,9 +52,6 @@ module.exports = defineConfig({
       Object.assign(config, {
         optimization
       });
-    } else {
-      // 为开发环境修改配置...
-      config.mode = 'development';
     }
   },
   css: {

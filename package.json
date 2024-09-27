@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "cross-env NODE_ENV=prod vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name index --dest lib/RenderJupyterNotebook",
     "build:lib-notebook": "vue-cli-service build --target lib ./src/utils/notebook/index.js --name index --dest lib/Notebook",
     "lint": "yarn lint:eslint && yarn lint:stylelint",
@@ -63,6 +63,7 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/test-utils": "^2.0.0-rc.18",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "element-plus": "^2.8.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
