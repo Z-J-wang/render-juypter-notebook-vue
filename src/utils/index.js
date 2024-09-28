@@ -6,3 +6,10 @@ export const fetchMarkdownData = async url => {
 
   return data;
 };
+
+export const fetchNotebookData = async url => {
+  const response = await fetch(url, { method: 'GET' });
+  const data = await response.json();
+
+  return data;
+};

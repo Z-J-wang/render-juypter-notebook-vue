@@ -1,6 +1,6 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "license": "MIT",
   "homepage": "https://github.com/Z-J-wang/render-juypter-notebook-vue#readme",
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
@@ -22,7 +22,7 @@
   ],
   "scripts": {
     "serve": "vue-cli-service serve",
-    "build": "vue-cli-service build",
+    "build": "cross-env NODE_ENV=prod vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name index --dest lib/RenderJupyterNotebook",
     "build:lib-notebook": "vue-cli-service build --target lib ./src/utils/notebook/index.js --name index --dest lib/Notebook",
     "lint": "yarn lint:eslint && yarn lint:stylelint",
@@ -63,6 +63,7 @@
     "@vue/cli-service": "~5.0.0",
     "@vue/test-utils": "^2.0.0-rc.18",
     "autoprefixer": "^10.4.20",
+    "cross-env": "^7.0.3",
     "element-plus": "^2.8.3",
     "eslint": "^7.32.0",
     "eslint-config-prettier": "^8.3.0",
@@ -79,6 +80,7 @@
     "stylelint-config-standard": "^20.0.0",
     "stylelint-order": "^6.0.3",
     "tailwindcss": "^3.4.13",
+    "terser-webpack-plugin": "^5.3.10",
     "vitest": "^0.28.4",
     "vue": "^3.0.0"
   },
