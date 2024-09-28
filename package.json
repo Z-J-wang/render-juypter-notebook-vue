@@ -2,7 +2,7 @@
   "name": "render-jupyter-notebook-vue",
   "version": "2.2.0",
   "license": "MIT",
-  "homepage": "https://github.com/Z-J-wang/render-juypter-notebook-vue#readme",
+  "homepage": "https://z-j-wang.github.io/render-juypter-notebook-vue/#/",
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
   "main": "./lib/RenderJupyterNotebook/index.umd.min.js",
   "author": "wangzhijie <1356573671@qq.com>",
