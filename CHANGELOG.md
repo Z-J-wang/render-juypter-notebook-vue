@@ -4,7 +4,7 @@ _2024-09-27_
 
 ### Features
 
-- [#63](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/64) 新增首页，并发布与 Github Pages
+- [#64](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/64) 新增首页，并发布与 Github Pages
 
 ### Changes
 
