@@ -1,18 +1,15 @@
-name: Lint
-run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
+name: Test
+run-name: ${{ github.actor }} running test action by ${{ github.event_name }}
 
 # 此工作流为可重用工作流，因此它没有自动触发器
 on:
   workflow_dispatch:
 
 jobs:
-  lint:
+  test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 16
       - name: Cache node modules
         id: cache-yarn
         uses: actions/cache@v4
@@ -31,7 +28,8 @@ jobs:
         name: List the state of node modules
         continue-on-error: true
         run: yarn list
+
       - name: Install
         run: yarn
-      - name: Lint
-        run: yarn lint
+      - name: Test
+        run: yarn test
