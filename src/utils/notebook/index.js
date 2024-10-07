@@ -25,8 +25,9 @@ export class Notebook {
    * @param {*} mathJaxTypesetterConfig mathjax 插件配置，默认值为 defaultMathJaxTypesetterConfig
    */
   constructor(source, trusted, shouldTypeset, markdownParser, mathJaxTypesetterConfig) {
+    if (!source) throw new Error('The Notebook is Error! Source is required!');
     if (!source.cells || !(source.cells instanceof Array))
-      throw 'The Notebook is Error! Cells attribute is required and is Array!';
+      throw new Error('The Notebook is Error! Cells attribute is required and is Array!');
     this._source = JSON.parse(JSON.stringify(source));
     const { cells } = this._source;
     this._cells = cells;
