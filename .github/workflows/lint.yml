@@ -1,5 +1,4 @@
 name: Lint
-run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
 
 # 此工作流为可重用工作流，因此它没有自动触发器
 on:

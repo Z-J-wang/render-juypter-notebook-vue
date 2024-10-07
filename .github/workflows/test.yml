@@ -1,5 +1,4 @@
 name: Test
-run-name: ${{ github.actor }} running test action by ${{ github.event_name }}
 
 # 此工作流为可重用工作流，因此它没有自动触发器
 on:

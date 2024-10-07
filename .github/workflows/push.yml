@@ -1,5 +1,5 @@
 name: Lint and Test
-run-name: ${{ github.actor }} running lint action by ${{ github.event_name }}
+run-name: ${{ github.actor }} running Lint and Test action by ${{ github.event_name }}
 on:
   push:
     branches: ['devel']
@@ -8,8 +8,7 @@ on:
   workflow_dispatch:
 
 jobs:
-  call-workflow-lint:
+  lint:
     uses: ./.github/workflows/lint.yml
-
-  call-workflow-test:
+  test:
     uses: ./.github/workflows/test.yml
