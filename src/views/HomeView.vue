@@ -8,7 +8,20 @@
         </el-button>
       </a>
     </template>
-    <RenderJupyterNotebook :notebook="notebook" />
+    <div>
+      <el-skeleton :rows="5" animated :count="4" :loading="loading">
+        <template #template>
+          <el-skeleton-item variant="h1" class="my-4 w-60" />
+          <el-skeleton-item variant="p" />
+          <el-skeleton-item variant="p" />
+          <el-skeleton-item variant="p" />
+          <el-skeleton-item variant="p" />
+        </template>
+        <template #default>
+          <RenderJupyterNotebook :notebook="notebook" />
+        </template>
+      </el-skeleton>
+    </div>
   </DefaultLayout>
 </template>
 
@@ -24,12 +37,14 @@ export default {
   components: { RenderJupyterNotebook, TheUploader, DefaultLayout, Download },
   data() {
     return {
-      notebook: {}
+      notebook: {},
+      loading: true
     };
   },
   created() {
     fetchNotebookData('/render-juypter-notebook-vue/OutputExamples.ipynb').then(data => {
       this.notebook = data;
+      this.loading = false;
     });
   }
 };

@@ -24,7 +24,7 @@
           </div>
         </div>
       </el-header>
-      <el-main class="mx-auto mt-4 mb-20">
+      <el-main class="mx-auto mt-4 mb-20 w-full">
         <slot />
       </el-main>
 
@@ -80,6 +80,7 @@ export default {
 
 .el-main {
   max-width: 1200px;
+  min-height: calc(100vh - 140px - 6rem);
   background-color: white;
 }
 
