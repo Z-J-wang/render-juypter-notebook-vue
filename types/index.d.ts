@@ -12,10 +12,3 @@ declare module 'render-jupyter-notebook-vue' {
     props: RenderJuypterNotebookProps;
   }
 }
-
-declare class Notebook {
-  public notebookHTML: string;
-  constructor(notebook: JupyterSource, trusted: Boolean, shouldTypeset: Boolean, markdownParser: any, mathJaxTypesetterConfig: any);
-
-  render(): void;
-}
