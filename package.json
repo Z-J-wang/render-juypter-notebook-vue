@@ -1,6 +1,6 @@
 {
   "name": "render-jupyter-notebook-vue",
-  "version": "2.2.1",
+  "version": "2.2.2-beta.1",
   "license": "MIT",
   "homepage": "https://z-j-wang.github.io/render-juypter-notebook-vue/#/",
   "repository": "https://github.com/Z-J-wang/render-juypter-notebook-vue",
@@ -20,11 +20,12 @@
     "lib/",
     "src/"
   ],
+  "types": "types/index.d.ts",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "cross-env NODE_ENV=prod vue-cli-service build",
     "build:lib": "vue-cli-service build --target lib ./src/components/RenderJupyterNotebook.vue --name index --dest lib/RenderJupyterNotebook",
-    "build:lib-notebook": "vue-cli-service build --target lib ./src/utils/notebook/index.js --name index --dest lib/Notebook",
+    "build:lib-notebook": "vue-cli-service build --target lib ./src/utils/notebook/index.js --name index --dest lib/Notebook && cp types/notebook.d.ts lib/Notebook/index.umd.d.ts",
     "lint": "yarn lint:eslint && yarn lint:stylelint",
     "lint:fix": "yarn lint:eslint --fix && yarn lint:stylelint --fix",
     "lint:eslint": "eslint --config .eslintrc.js --ext .js,.vue,.html,.ts --ignore-path .eslintignore ./",
