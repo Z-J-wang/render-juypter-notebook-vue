@@ -18,7 +18,8 @@
   ],
   "files": [
     "lib/",
-    "src/"
+    "src/",
+    "types/"
   ],
   "types": "types/index.d.ts",
   "scripts": {
