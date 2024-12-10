@@ -1,4 +1,4 @@
-interface JupyterSource {
+export interface JupyterSource {
   cells: Array<any>; // Jupyter Notebook cells
 }
 
