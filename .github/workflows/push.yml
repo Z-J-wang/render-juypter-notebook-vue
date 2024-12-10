@@ -2,9 +2,11 @@ name: Lint and Test
 run-name: ${{ github.actor }} running Lint and Test action by ${{ github.event_name }}
 on:
   push:
-    branches: ['devel']
+    branches:
+      - '!master'
+      - '!main'
   pull_request:
-    branches: ['master']
+    branches: ['master', 'main']
   workflow_dispatch:
 
 jobs:
