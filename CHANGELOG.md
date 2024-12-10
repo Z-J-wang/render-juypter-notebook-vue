@@ -1,3 +1,11 @@
+## 2.2.3
+
+_2024-12-10_
+
+### Bug fixes
+
+- 修正 Jupyter 拼写错误问题
+
 ## 2.2.2
 
 _2024-12-10_
@@ -21,11 +29,11 @@ _2024-09-27_
 
 ### Features
 
-- [#64](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/64) 新增首页，并发布与 Github Pages
+- [#64](https://github.com/Z-J-wang/render-jupyter-notebook-vue/issues/64) 新增首页，并发布与 Github Pages
 
 ### Changes
 
-- [#63](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/63) 引入 highlight.js，优化 notebook 中的 markdown 代码的渲染
+- [#63](https://github.com/Z-J-wang/render-jupyter-notebook-vue/issues/63) 引入 highlight.js，优化 notebook 中的 markdown 代码的渲染
 
 ## 2.1.0
 
@@ -33,7 +41,7 @@ _2024-08-31_
 
 ### Changes
 
-- [#55](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/55) `class notebook` 增加形参`mathJaxTypesetterConfig`，用于自定义`MathJaxTypesetter`的实例化配置
+- [#55](https://github.com/Z-J-wang/render-jupyter-notebook-vue/issues/55) `class notebook` 增加形参`mathJaxTypesetterConfig`，用于自定义`MathJaxTypesetter`的实例化配置
 
 ## 2.0.4
 
@@ -53,7 +61,7 @@ _2024-04-19_
 
 ### Bug fixes
 
-- [渲染 RenderJupyterNotebook 组件前必须要保证 notebook 数据已经获取到位，否则会报错。 · Issue #44 · Z-J-wang/render-juypter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue/issues/44)
+- [渲染 RenderJupyterNotebook 组件前必须要保证 notebook 数据已经获取到位，否则会报错。 · Issue #44 · Z-J-wang/render-jupyter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-jupyter-notebook-vue/issues/44)
 
 ## 2.0.2
 

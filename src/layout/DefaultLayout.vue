@@ -6,7 +6,7 @@
           <div class="flex items-center gap-3">
             <a
               class="inline-flex items-center gap-3"
-              href="https://github.com/Z-J-wang/render-juypter-notebook-vue"
+              href="https://github.com/Z-J-wang/render-jupyter-notebook-vue"
               target="_blank"
               rel="noopener noreferrer nofollow"
             >
