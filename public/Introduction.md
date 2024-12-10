@@ -1,6 +1,6 @@
 ## 介绍
 
-RenderJupyterNotebook 是一个 vue 3.x 组件，**通过 JavaScript 实现 jupyter notebook 文件的还原渲染**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于 JupyterLab 并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
+RenderJupyterNotebook 是一个 vue 3.x 组件，**通过 JavaScript 实现 jupyter notebook 文件的还原渲染**。渲染效果基本和[JupyterLab](https://github.com/jupyterlab/jupyterlab)的保持一致。这是因为最底层的渲染逻辑是直接引用于 JupyterLab 并进行了抽离组装。其中核心代码在[src/utils/notebook](https://github.com/Z-J-wang/render-jupyter-notebook-vue/tree/master/src/utils/notebook)中的`Class Notebook`。
 
 ## 使用
 
@@ -14,7 +14,7 @@ npm i render-jupyter-notebook-vue
 
 安装好插件后，有两种使用方法：
 
-1. 项目中直接引入[RenderJupyterNotebook](https://github.com/Z-J-wang/render-juypter-notebook-vue/blob/master/src/components/RenderJupyterNotebook.vue)组件最为便捷。
+1. 项目中直接引入[RenderJupyterNotebook](https://github.com/Z-J-wang/render-jupyter-notebook-vue/blob/master/src/components/RenderJupyterNotebook.vue)组件最为便捷。
 2. 调用 Class Notebook 渲染 Notebook
 
 ### 方法一：直接引入 RenderJupyterNotebook 组件
@@ -127,7 +127,7 @@ this.$refs.NotebookFragment.appendChild(fragment);
 
 ### 使用说明
 
-`Class Notebook`并不依赖于 vue。可单独引入其他架构项目中。具体用法请查看：[Z-J-wang/render-juypter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-juypter-notebook-vue#方法二调用class-notebook渲染notebook)
+`Class Notebook`并不依赖于 vue。可单独引入其他架构项目中。具体用法请查看：[Z-J-wang/render-jupyter-notebook-vue (github.com)](https://github.com/Z-J-wang/render-jupyter-notebook-vue#方法二调用class-notebook渲染notebook)
 
 ### Class Notebook 更多说明
 

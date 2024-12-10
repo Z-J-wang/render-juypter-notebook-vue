@@ -2,7 +2,7 @@
   <DefaultLayout>
     <template #header-right>
       <TheUploader v-model:notebook="notebook" />
-      <a href="/render-juypter-notebook-vue/OutputExamples.ipynb" target="_blank">
+      <a href="/render-jupyter-notebook-vue/OutputExamples.ipynb" target="_blank">
         <el-button plain class="example-button">
           <el-icon size="20" class="mr-1"><Download /></el-icon> Example
         </el-button>
@@ -42,7 +42,7 @@ export default {
     };
   },
   created() {
-    fetchNotebookData('/render-juypter-notebook-vue/OutputExamples.ipynb').then(data => {
+    fetchNotebookData('/render-jupyter-notebook-vue/OutputExamples.ipynb').then(data => {
       this.notebook = data;
       this.loading = false;
     });
