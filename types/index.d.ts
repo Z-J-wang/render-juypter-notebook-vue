@@ -4,11 +4,11 @@ interface JupyterSource {
 
 declare module 'render-jupyter-notebook-vue' {
 
-  interface RenderJuypterNotebookProps {
+  interface RenderJupyterNotebookProps {
     notebook: JupyterSource; // Jupyter Notebook object
   }
 
-  export class RenderJuypterNotebook {
-    props: RenderJuypterNotebookProps;
+  export class RenderJupyterNotebook {
+    props: RenderJupyterNotebookProps;
   }
 }
