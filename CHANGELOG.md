@@ -1,3 +1,11 @@
+## 2.2.4
+
+_2024-12-10_
+
+### Features
+
+- [#87](https://github.com/Z-J-wang/render-jupyter-notebook-vue/issues/87) TypeScript 类型声明，新增 JupyterSource 类型
+
 ## 2.2.3
 
 _2024-12-10_

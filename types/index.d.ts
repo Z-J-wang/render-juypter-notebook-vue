@@ -1,6 +1,6 @@
-interface JupyterSource {
-  cells: Array<any>; // Jupyter Notebook cells
-}
+import { type JupyterSource } from './notebook'
+
+export { type JupyterSource } from './notebook'
 
 declare module 'render-jupyter-notebook-vue' {
 
